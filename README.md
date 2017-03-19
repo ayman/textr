@@ -43,13 +43,15 @@ when it completes too.
 
 ## Does this help your photo buisness? ##
 
-Please donate a little to [100Cameras][100Cameras]. This plugin is
-free and under a nice MIT License. Google gives you some queries for
-free, then you have to pay them for more.  If you like this piece of
-shareware (and this helps your business out)...send a donation to this
-nice non-profit (pay it forward yo).  I'm not going to limit or
-cripple the plugin.  Just if you like it, send a donation. :-) Sorry
-to say, Google will (for now) continue to charge you beyond their free
-query limit.
+Please donate to [100Cameras][100Cameras]; they teach youth in
+marginalized communities how to express themselves through
+photography, interact with their environment, and become agents of
+change. This plugin is free and under a nice MIT License. Google gives
+you some queries for free, then you have to pay them for more.  If you
+like this plugin (especially if this helps your business out)...send a
+donation to this nice non-profit (pay it forward yo).  I'm not going
+to limit or cripple the plugin.  Just if you like it, send a
+donation. :-) Sorry to say, Google will continue to charge you beyond
+their free query limit.
 
 [100Cameras]: http://100cameras.org "100 Cameras"
