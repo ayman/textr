@@ -4,9 +4,9 @@
 
 return {
    LrSdkVersion = 5.0,
-   
+
    LrToolkitIdentifier = 'com.shamurai.textr',
-   LrPluginName = LOC "$$$/Textr/PluginName=Textr",
+   LrPluginName = LOC "$$$/shamurai/textr/pluginName=Textr OCR Tagger",
 
    LrInitPlugin = 'PluginInit.lua',
 
@@ -14,13 +14,13 @@ return {
    LrMetadataTagsetFactory = 'TextrTagset.lua',
 
    LrLibraryMenuItems = {
-      title = "Scan and OCR &Text",
+      title = LOC "$$$/shamurai/textr/menu=Textr OCR",
       file = "OcrText.lua",
       enabledWhen = "photosSelected",
    },
 
    LrPluginInfoProvider = 'PluginInfoProvider.lua',
    LrPluginInfoUrl = "http://shamurai.com/bin/textr",
-   
-   VERSION = { major=0, minor=0, revision=7, build=1470600765 },
+
+   VERSION = { major=0, minor=0, revision=8, build=1470600765 },
 }

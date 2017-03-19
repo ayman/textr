@@ -19,16 +19,36 @@ PluginManager = {}
 
 function PluginManager.sectionsForTopOfDialog(viewFactory, properties)
    -- local f = viewFactory;
-   
+
    local f = LrView.osFactory();
    local prefs = LrPrefs.prefsForPlugin();
-   
+
    if (prefs.google_api_key == nil or
        prefs.google_api_key == "") then
-      prefs.google_api_key = "<Please Configure In Google Clound Dashboard>"
+      prefs.google_api_key = LOC '$$$/shamurai/textr/gconf=<Please Configure In Google Clound Dashboard>'
    end
 
-   local r = f:row {  
+   if (prefs.text_length == nil or
+       prefs.text_length == "") then
+       prefs.text_length = 0
+   end
+
+   if (prefs.allow_regex == nil or
+       prefs.allow_regex == "") then
+       prefs.allow_regex = "^[a-zA-Z0-9]+$"
+   end
+
+   if (prefs.img_size == nil or
+       prefs.img_size == "") then
+       prefs.img_size = "320"
+   end
+   
+   if (prefs.max_imgs == nil or
+       prefs.max_imgs == "") then
+       prefs.max_imgs = "250"
+   end
+
+   local r = f:row {
       spacing = f:control_spacing(),
       f:static_text {
          title = 'API Key (CLI):',
@@ -44,7 +64,7 @@ function PluginManager.sectionsForTopOfDialog(viewFactory, properties)
       },
       f:push_button {
          width = 150,
-         title = 'Google Cloud Dashboard',
+         title = LOC '$$$/shamurai/textr/gdash=Google Cloud Dashboard',
          enabled = true,
          action = function()
             LrHttp.openUrlInBrowser(_G.URL)
@@ -52,12 +72,79 @@ function PluginManager.sectionsForTopOfDialog(viewFactory, properties)
       },
    }
 
-   local s = {
-      title = "Textr OCR Tagger",
-      bind_to_object = prefs,
-      r,
+   local t = f:row {
+      spacing = f:control_spacing(),
+      f:static_text {
+         title = LOC '$$$/shamurai/textr/tlength=Exact text length:',
+         alignment = 'left',
+         -- fill_horizontal = 1,
+      },
+      f:edit_field {
+         immediate = true,
+         -- value_to_string = true,
+         alignment = 'left',
+         fill_horizontal = 1,
+         value = LrView.bind('text_length'),
+      },
+   }
+
+   local u = f:row {
+      spacing = f:control_spacing(),
+      f:static_text {
+         title = LOC '$$$/shamurai/textr/imgsize=Image size to use:',
+         alignment = 'left',
+         -- fill_horizontal = 1,
+      },
+      f:edit_field {
+         immediate = true,
+         value_to_string = true,
+         alignment = 'left',
+         fill_horizontal = 1,
+         value = LrView.bind('img_size'),
+      },
+   }
+   local uu = f:row {
+      spacing = f:control_spacing(),
+      f:static_text {
+         title = LOC '$$$/shamurai/textr/maximgs=Max batch size:',
+         alignment = 'left',
+         -- fill_horizontal = 1,
+      },
+      f:edit_field {
+         immediate = true,
+         value_to_string = true,
+         alignment = 'left',
+         fill_horizontal = 1,
+         value = LrView.bind('max_imgs'),
+      },
+   }
+
+   local w = f:row {
+      spacing = f:control_spacing(),
+      f:static_text {
+         title = LOC '$$$/shamurai/textr/aregex=Allow Regex:',
+         alignment = 'left',
+         -- fill_horizontal = 1,
+      },
+      f:edit_field {
+         immediate = true,
+         value_to_string = true,
+         alignment = 'left',
+         fill_horizontal = 1,
+         value = LrView.bind('allow_regex'),
+      },
    }
    
+   local s = {
+      title = LOC "$$$/shamurai/textr/pluginName=Textr OCR Tagger",
+      bind_to_object = prefs,
+      r,
+      u,
+      t,
+      uu,
+      w,
+   }
+
    return {s}
 end
 
@@ -70,43 +157,3 @@ return {
    sectionsForTopOfDialog = sectionsForTopOfDialog,
    endDialog = endDialog
 }
-
-
--- function PluginManager.sectionsForTopOfDialog( f, p )
---    local s = {
---       {
---          title = "Configure Google Cloud API",
---          f:row {
---             spacing = f:control_spacing(),
-
---             f:static_text {
---                title = 'API Key (CLI):',
---                alignment = 'left',
---                -- fill_horizontal = 1,
---             },
-
---             f:edit_field {
---                immediate = true,
---                value_to_string = true;
---                alignment = 'left',
---                fill_horizontal = 1,
---                -- value = _G.google_api_key,
---                -- value = LrView.bind('google_api_key'),
---             },
-
---             f:push_button {
---                width = 150,
---                title = 'Google Cloud Dashboard',
---                enabled = true,
---                action = function()
---                   LrHttp.openUrlInBrowser(_G.URL)
---                end,
---             },
---          },
---       },
---    }
---    return s
--- end
-
--- table.insert(sections, sectionCustom)
-

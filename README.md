@@ -1,7 +1,7 @@
 # Textr Plugin for Lightroom #
 
-Runs OCR using the Google Cloud Vision API and suggests tags for the
-photos.
+Recognize text in photos using the Google Cloud Vision API and
+suggests tags for the photos.
 
 ## About
 
@@ -19,26 +19,37 @@ whip up in today's age...and here we are.
 
 [PPP57]: https://petapixel.com/2016/03/20/ep-57-strobist-david-hobby-sticks-consumers/
 
-## How to get an API key for Google Cloud Services
+There are a few settings for the plugin which you'll have to
+tune. I'll get to those later
+
+## How to use this plugin
+
+### Install Plugin
+
+### How to get an API key for Google Cloud Services
 
 It's not easy...as of the time I wrote this plugin, this is basically
 what you want to do.
 
-## Things to do
+### Settings
 
-Make this work on more than one image at a time.
+### Running the plugin
 
-Batch process the upload mechanism. 
+The Textr stores a single custom metadata string that is searchable
+but won't clutter your existing metadata or keywords.  Text
+recognition can be kinda noisy, so I didn't want to mess up any nice
+categorization people may have.  Remember you can **undo** this task
+when it completes too.
 
-Finish instructions.
+## Does this help your photo buisness? ##
 
-Finnish instructions. 
+Please donate a little to [100Cameras][100Cameras]. This plugin is
+free and under a nice MIT License. Google gives you some queries for
+free, then you have to pay them for more.  If you like this piece of
+shareware (and this helps your business out)...send a donation to this
+nice non-profit (pay it forward yo).  I'm not going to limit or
+cripple the plugin.  Just if you like it, send a donation. :-) Sorry
+to say, Google will (for now) continue to charge you beyond their free
+query limit.
 
-## Please Donate A Little
-
-Google gives you some queries for free, then you have to pay them for
-more.  If you like this piece of shareware (and this helps your
-business out)...you can send me a one time donation for writing this.
-I'm not going to limit or cripple the plugin.  Just if you like it,
-send a donation. :-) Sorry to say, Google will (for now) continue to
-charge you beyond their free query limit.
+[100Cameras]: http://100cameras.org "100 Cameras"
