@@ -1,5 +1,7 @@
 _G.pluginID = "com.shamurai.textr"
 _G.URL = "https://console.cloud.google.com"
 _G.GIT_URL = "https://github.com/ayman/textr"
+_G.DONATE_URL = "https://100cameras.wedid.it/"
 _G.Shamurai = "http://shamurai.com"
-_G.support = LOC "$$$/shamurai/textr/support=MIT License. Unsupported. If you use this plugin for work, please make a donation. You can file issues on the Github page but you can also fix them and submit a pull request."
+_G.Support = LOC "$$$/shamurai/textr/support=Generally unsupported.  You can file issues on the Github page but you can also fix them and submit a pull request."
+_G.Donate = LOC "$$$/shamurai/textr/support=If you like this plugin or use it for work, please make a donation to 100Cameras. They teach youth in marginalized communities how to express themselves through photography, interact with their environment, and become agents of change."

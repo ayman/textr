@@ -18,15 +18,8 @@ end
 PluginManager = {}
 
 function PluginManager.sectionsForTopOfDialog(viewFactory, properties)
-   -- local f = viewFactory;
-
    local f = LrView.osFactory();
    local prefs = LrPrefs.prefsForPlugin();
-
-   if (prefs.google_api_key == nil or
-       prefs.google_api_key == "") then
-      prefs.google_api_key = LOC '$$$/shamurai/textr/gconf=<Please Configure In Google Clound Dashboard>'
-   end
 
    if (prefs.text_length == nil or
        prefs.text_length == "") then
@@ -35,17 +28,17 @@ function PluginManager.sectionsForTopOfDialog(viewFactory, properties)
 
    if (prefs.allow_regex == nil or
        prefs.allow_regex == "") then
-       prefs.allow_regex = "^[a-zA-Z0-9]+$"
+--       prefs.allow_regex = "^[a-zA-Z0-9]+$"
    end
 
    if (prefs.img_size == nil or
        prefs.img_size == "") then
-       prefs.img_size = "320"
+       prefs.img_size = 320
    end
 
    if (prefs.max_imgs == nil or
        prefs.max_imgs == "") then
-       prefs.max_imgs = "250"
+       prefs.max_imgs = 250
    end
 
    return {
@@ -57,13 +50,13 @@ function PluginManager.sectionsForTopOfDialog(viewFactory, properties)
             f:static_text {
                title = 'API Key (CLI):',
                alignment = 'left',
-               -- fill_horizontal = 1,
             },
             f:edit_field {
                immediate = true,
                value_to_string = true,
                alignment = 'left',
                fill_horizontal = 1,
+               placeholder_value = LOC "$$$/shamurai/textr/gconf=<Please Configure In Google Clound Dashboard>",
                tooltip = LOC "$$$/shamurai/textr/apifield=Should be a long API key of random letters and numbers.", 
                value = LrView.bind('google_api_key'),
             },
@@ -79,69 +72,75 @@ function PluginManager.sectionsForTopOfDialog(viewFactory, properties)
          f:row {
             spacing = f:control_spacing(),
             f:static_text {
-               title = LOC '$$$/shamurai/textr/tlength=Exact text length:',
+               title = LOC '$$$/shamurai/textr/imgsize=Thumb size:',
                alignment = 'left',
-               -- fill_horizontal = 1,
             },
             f:edit_field {
                immediate = true,
-               -- value_to_string = true,
-               alignment = 'left',
-               fill_horizontal = 1,
-               value = LrView.bind('text_length'),
-            },
-         },
-         f:row {
-            spacing = f:control_spacing(),
-            f:static_text {
-               title = LOC '$$$/shamurai/textr/imgsize=Image size to use:',
-               alignment = 'left',
-               -- fill_horizontal = 1,
-            },
-            f:edit_field {
-               immediate = true,
-               value_to_string = true,
-               alignment = 'left',
-               fill_horizontal = 1,
+               string_to_value = getInt,
+               increment = 120,
+               precision = 0,
+               min = 120,
+               max = 2048,
+               alignment = 'right',
+               width_in_digits = 4,
                value = LrView.bind('img_size'),
             },
-         },
-         f:row {
-            spacing = f:control_spacing(),
             f:static_text {
-               title = LOC '$$$/shamurai/textr/maximgs=Max batch size:',
+               title = LOC '$$$/shamurai/textr/maximgs=Batch size:',
                alignment = 'left',
-               -- fill_horizontal = 1,
             },
             f:edit_field {
                immediate = true,
-               value_to_string = true,
-               alignment = 'left',
-               fill_horizontal = 1,
+               increment = 1,
+               large_increment = 10,
+               string_to_value = getInt,
+               validate = getValidInt,
+               precision = 0,
+               min = 1,
+               max = 1000,
+               alignment = 'right',               
+               width_in_digits = 4,               
                value = LrView.bind('max_imgs'),
-            },
-         },
-         f:row {
-            spacing = f:control_spacing(),
+            },            
             f:static_text {
                title = LOC '$$$/shamurai/textr/aregex=Allow Regex:',
                alignment = 'left',
-               -- fill_horizontal = 1,
+            },
+            f:combo_box {
+               items = { "^[a-zA-Z0-9]+$", "^[0-9]+$", "^[a-zA-Z]+$" },
+               tooltip = "Numbers & Letters: ^[a-zA-Z0-9]+$\nNumbers: ^[0-9]+$\nLetters: ^[a-zA-Z]+$",
+               immediate = true,
+               width_in_digits = 12,
+               alignment = 'right',
+               value = LrView.bind('allow_regex'),
+            },            
+            f:static_text {
+               title = LOC '$$$/shamurai/textr/tlength=Matched length:',
+               alignment = 'left',
             },
             f:edit_field {
+               increment = 1,
+               large_increment = 2,
                immediate = true,
-               value_to_string = true,
-               alignment = 'left',
-               fill_horizontal = 1,
-               value = LrView.bind('allow_regex'),
-            },
+               string_to_value = getInt,
+               precision = 0,
+               min = 0,
+               max = 10,
+               alignment = 'right',
+               width_in_digits = 8,               
+               value = LrView.bind('text_length'),
+            },                        
+         },
+         f:separator {
+            fill_horizontal = 1
          },
          f:row {
             f:static_text {
                title = 'By: ',
             },
             f:static_text {
-               title= LOC 'David A. Shamma. Under MIT License.',
+               title= LOC 'David A. Shamma.',
                fill_horizontal = 1,
             },
             f:push_button {
@@ -166,10 +165,13 @@ function PluginManager.sectionsForTopOfDialog(viewFactory, properties)
                title = 'Support: ',
             },
             f:static_text {
-               title= _G.support,
-               width_in_chars = 40,
+               title = _G.Support,
+               width_in_chars = 35,
                height_in_lines = -1,
                fill_horizontal = 1,
+            },
+            f:spacer {
+               width = 5,
             },
             f:push_button {
                width = 150,
@@ -180,8 +182,50 @@ function PluginManager.sectionsForTopOfDialog(viewFactory, properties)
                end,
             },            
          },
+         f:row {
+            f:static_text {
+               title = 'Donate: ',
+            },
+            f:static_text {
+               title = _G.Donate,
+               width_in_chars = 35,
+               height_in_lines = -1,
+               fill_horizontal = 1,
+            },
+            f:spacer {
+               width = 5,
+            },            
+            f:push_button {
+               width = 150,
+               title = LOC '$$$/shamurai/textr/donateb=Donate to 100Cameras',
+               enabled = true,
+               action = function()
+                  LrHttp.openUrlInBrowser(_G.DONATE_URL)
+               end,
+            },            
+         },
       }
    }
+end
+
+function PluginManager.sectionsForBottomOfDialog(viewFactory, properties)
+   local f = LrView.osFactory();   
+   return {
+      {
+         title = LOC "$$$/shamurai/textr/license=License",
+         bind_to_object = prefs,
+         f:row {
+            spacing = f:control_spacing(),
+            f:static_text {
+               title = "MIT License\n\nCopyright (c) 2017 David A. Shamma\n\nPermission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the \"Software\"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.",
+               width_in_chars = 50,
+               height_in_lines = -1,
+               fill_horizontal = 1,
+               fill_vertical = 1,
+            },
+         },
+      }
+   }  
 end
 
 local function endDialog(properties)
@@ -193,7 +237,21 @@ local function endDialog(properties)
    prefs.max_imgs = trim(max_imgs)
 end
 
+local function getInt( v, s )
+   return math.floor(tonumber(s))
+end
+
+local function getValidInt( v, val )
+   n = tonumber(val)
+   if n then
+      return { true, math.floor(n) }
+   else
+      return { false, 320, "Not a valid number." }
+   end
+end
+
 return {
    sectionsForTopOfDialog = sectionsForTopOfDialog,
+   sectionsForBottomOfDialog = sectionsForBottomOfDialog,
    endDialog = endDialog
 }
