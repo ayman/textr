@@ -6,10 +6,10 @@ _G.API_TIP = LOC "$$$/shamurai/textr/apitip=Should be a long API key of random l
 _G.BATCHSIZE = LOC '$$$/shamurai/textr/batchsize=Batch size'
 _G.BY_LABEL = LOC '$$$/shamurai/textr/bylabel=By'
 _G.CONF = LOC "$$$/shamurai/textr/conf=Configuration"
-_G.DONATE_BUTTON = LOC '$$$/shamurai/textr/donateb=Donate: 100Cameras'
+_G.DONATE_BUTTON = LOC '$$$/shamurai/textr/donateb=Donate: First Exposures'
 _G.DONATE_LABEL = LOC '$$$/shamurai/textr/donatel=Donate'
-_G.DONATE_TEXT = LOC "$$$/shamurai/textr/donatetext=If you like this plugin or use it for work, please make a donation to 100Cameras. They teach youth in marginalized communities how to express themselves through photography, interact with their environment, and become agents of change."
-_G.DONATE_URL = "https://100cameras.wedid.it/"
+_G.DONATE_TEXT = LOC "$$$/shamurai/textr/donatetext=If you like this plugin or use it for work, please make a donation to First Exposures. It's a San Francisco-based, nationally recognized youth mentoring program that strives to make a major long-term difference in the lives of high-need, underserved San Francisco Bay Area youth by providing a venue for them to enhance their self-confidence, develop their creativity, and gain a passion for learning."
+_G.DONATE_URL = "https://www.firstexposures.org/"
 _G.FOUND_TEXT = LOC "$$$/shamurai/textr/foundtext=Found Text"
 _G.GCONF = LOC "$$$/shamurai/textr/gconf=<Please Configure In Google Clound Dashboard>"
 _G.GDASH = LOC '$$$/shamurai/textr/gdash=Google Cloud Dashboard'

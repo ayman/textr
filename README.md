@@ -107,21 +107,23 @@ select all the photos and empty out that one field in the Textr
 metadata panel. Or just tweak the settings and re-run, it will replace
 the existing custom metadata.
 
-## This is cool! Is it free?
+## This is cool! Is it free? 
 
 Glad you like it! It's free but
-please [donate to 100Cameras][100Cameras]; they teach youth in
-marginalized communities how to express themselves through
-photography, interact with their environment, and become agents of
-change. This plug-in is free and under a nice MIT License. Google
-gives you some queries for free, then you have to pay them for more.
-If you like this plug-in (especially if this helps your business
-out)...send a donation to this nice non-profit (pay it forward yo).
-I'm not going to limit or cripple the plug-in.  Just if you like it,
-send a donation. :-) Sorry to say, Google will continue to charge you
-beyond their free query limit.
+please [donate to First Exposures][FirstExposures]; it's a San
+Francisco-based, nationally recognized youth mentoring program that
+strives to make a major long-term difference in the lives of
+high-need, underserved San Francisco Bay Area youth by providing a
+venue for them to enhance their self-confidence, develop their
+creativity, and gain a passion for learning. This plug-in is free and
+under a nice MIT License. Google gives you some queries for free, then
+you have to pay them for more.  If you like this plug-in (especially
+if this helps your business out)...send a donation to this nice
+non-profit (pay it forward yo).  I'm not going to limit or cripple the
+plug-in.  Just if you like it, send a donation. :-) Sorry to say,
+Google will continue to charge you beyond their free query limit.
 
-[100Cameras]: https://100cameras.wedid.it/ "100 Cameras"
+[FirstExposures]: http://www.firstexposures.org/ "Donate please!"
 
 ## There's a problem with the plugin!
 
