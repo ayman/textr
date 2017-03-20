@@ -72,22 +72,23 @@ numbers, you can set this to only pick up numbers.  Or if its just
 text, same deal . It defaults to a mix of numbers and text.  You can
 hover to get a tooltip to help you pick or if you are familiar, you
 can write your own.
-  * *Letters and numbers:* ^[a-zA-Z0-9]+$
-  * *Numbers only:* ^[0-9]+$
-  * *Letters only:* ^[a-zA-Z]+$
+  * *Letters and numbers:* `^[a-zA-Z0-9]+$`
+  * *Numbers only:* `^[0-9]+$`
+  * *Letters only:* `^[a-zA-Z]+$`
 Basically these are the options I put in place.  Note that if its set
-to letters, other characters (like Chinese) won't get picked up.
+to letters, other characters (like Chinese or Arabic) won't get picked
+up.
 
 ### Matched length
 
 In conjunction with the *Regex*, you can use this setting to say how
 long the bib number should be.  Only strings of this size will be
-returned, if its set to the default of 0, any size will match.  Keep
+returned, if its set to the default of `0`, any size will match.  Keep
 in mind, if a bib is partially hidden by a runner or other
 interference, it won't pick up the partial number. So if you set this
-to 4 and have two runners: "1234" and "5678" and the 5 is hidden by a
-runner's hand, the API will find "1234" only..."678" won't be tagged
-by the plugin.
+to `4` and have two runners: `1234` and `5678` and the `5` is hidden
+by a runner's hand, the API will find `1234` only...`678` won't be
+tagged by the plugin.
 
 ### Running the plug-in
 
@@ -101,7 +102,8 @@ didn't want to mess up any nice categorization people may have.
 ### Undo Please
 Remember you can **undo** this task when it completes too. Or just
 select all the photos and empty out that one field in the Textr
-metadata panel.
+metadata panel. Or just tweak the settings and re-run, it will replace
+the existing custom metadata.
 
 ## Does this help your photo buisness? ##
 
@@ -127,4 +129,4 @@ send me a pull request.
 
 This code is under the MIT License permissive license.  You can do
 anything you want with the code, just cite me back and I'm not liable
-for anything.
+for anything.  FTR, I tested this on about 20 photos. Just saying. 
