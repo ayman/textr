@@ -1,7 +1,7 @@
 # Textr Plug-In for Lightroom #
 
 Recognize text in photos using the Google Cloud Vision API and
-suggests tags for the photos.
+annotate metadata for the photos.
 
 ## About
 
