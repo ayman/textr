@@ -3,7 +3,7 @@ return {
    metadataFieldsForPhotos = {
       {
          id = 'textrFoundText',
-         title = LOC "$$$/shamurai/textr/foundtext=Found Text",
+         title = _G.FOUND_TEXT,
          dataType = 'string',
          browsable = true,
          searchable = true,

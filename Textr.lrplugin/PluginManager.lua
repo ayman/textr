@@ -28,7 +28,6 @@ function PluginManager.sectionsForTopOfDialog(viewFactory, properties)
 
    if (prefs.allow_regex == nil or
        prefs.allow_regex == "") then
---       prefs.allow_regex = "^[a-zA-Z0-9]+$"
    end
 
    if (prefs.img_size == nil or
@@ -43,13 +42,13 @@ function PluginManager.sectionsForTopOfDialog(viewFactory, properties)
 
    return {
       {
-         title = LOC "$$$/shamurai/textr/pluginName=Textr OCR Tagger",
+         title = _G.plugin_name,
          bind_to_object = prefs,
          f:group_box {
-            title = "About",
-            f:row{
+            title = _G.ABOUT,
+            f:row {
                f:static_text {
-                  title = "Recognize text in photos using the Google Cloud Vision API and add a searchable field for the photos. This came about as I was listening to the PetaPixel Podcast #57 and someone had a question about an automated way to tag race bib numbers in Lightroom. I thought it shouldn't be that hard to whip up in today's age...and here we are.",
+                  title = _G.ABOUT_TEXT,
                   alignment = 'left',
                   width_in_chars = 58,
                   height_in_lines = -1,
@@ -58,11 +57,11 @@ function PluginManager.sectionsForTopOfDialog(viewFactory, properties)
             },
          },
          f:group_box {
-            title = "Configuration",
+            title = _G.CONF,
             f:row {
                spacing = f:control_spacing(),
                f:static_text {
-                  title = 'API Key (CLI):',
+                  title = _G.API_KEY_TITLE,
                   alignment = 'left',
                },
                f:edit_field {
@@ -70,14 +69,14 @@ function PluginManager.sectionsForTopOfDialog(viewFactory, properties)
                   value_to_string = true,
                   alignment = 'left',
                   fill_horizontal = 1,
-                  width_in_digits = 40,
-                  placeholder_value = LOC "$$$/shamurai/textr/gconf=<Please Configure In Google Clound Dashboard>",
-                  tooltip = LOC "$$$/shamurai/textr/apifield=Should be a long API key of random letters and numbers.", 
+                  width_in_digits = 44,
+                  placeholder_value = _G.GCONF,
+                  tooltip = _G.API_TIP,
                   value = LrView.bind('google_api_key'),
                },
                f:push_button {
-                  width = 150,
-                  title = LOC '$$$/shamurai/textr/gdash=Google Cloud Dashboard',
+                  width = 155,
+                  title = _G.GDASH,
                   enabled = true,
                   action = function()
                      LrHttp.openUrlInBrowser(_G.URL)
@@ -87,7 +86,7 @@ function PluginManager.sectionsForTopOfDialog(viewFactory, properties)
             f:row {
                spacing = f:control_spacing(),
                f:static_text {
-                  title = LOC '$$$/shamurai/textr/imgsize=Thumb size:',
+                  title = _G.THUMBSIZE,
                   alignment = 'left',
                },
                f:edit_field {
@@ -102,7 +101,7 @@ function PluginManager.sectionsForTopOfDialog(viewFactory, properties)
                   value = LrView.bind('img_size'),
                },
                f:static_text {
-                  title = LOC '$$$/shamurai/textr/maximgs=Batch size:',
+                  title = _G.BATCHSIZE,
                   alignment = 'left',
                },
                f:edit_field {
@@ -114,25 +113,24 @@ function PluginManager.sectionsForTopOfDialog(viewFactory, properties)
                   precision = 0,
                   min = 1,
                   max = 1000,
-                  alignment = 'right',               
-                  width_in_digits = 3,               
+                  alignment = 'right',
+                  width_in_digits = 3,
                   value = LrView.bind('max_imgs'),
-               },            
+               },
                f:static_text {
-                  title = LOC '$$$/shamurai/textr/aregex=Allow Regex:',
+                  title = _G.ALLOW_REGEX,
                   alignment = 'left',
                },
                f:combo_box {
                   items = { "^[a-zA-Z0-9]+$", "^[0-9]+$", "^[a-zA-Z]+$" },
                   tooltip = "Numbers & Letters: ^[a-zA-Z0-9]+$\nNumbers: ^[0-9]+$\nLetters: ^[a-zA-Z]+$",
                   immediate = true,
-                  width_in_digits = 12,
+                  width_in_digits = 14,
                   alignment = 'right',
-                  fill_horizontal = 1,
                   value = LrView.bind('allow_regex'),
-               },            
+               },
                f:static_text {
-                  title = LOC '$$$/shamurai/textr/tlength=Matched length:',
+                  title = _G.MATCHED_LENGTH,
                   alignment = 'left',
                },
                f:edit_field {
@@ -144,97 +142,110 @@ function PluginManager.sectionsForTopOfDialog(viewFactory, properties)
                   min = 0,
                   max = 10,
                   alignment = 'right',
-                  width_in_digits = 3,               
+                  width_in_digits = 3,
                   value = LrView.bind('text_length'),
-               },                        
+               },
             },
-         },         
-         -- f:separator {
-         --    fill_horizontal = 1
-         -- },        
-         f:row {
-            f:static_text {
-               title = 'By: ',
-            },
-            f:static_text {
-               title= LOC 'David A. Shamma.',
-               fill_horizontal = 1,
-            },
-            f:push_button {
-               width = 150,
-               title = 'Twitter: @ayman',
-               enabled = true,
-               action = function()
-                  LrHttp.openUrlInBrowser("http://twitter.com/ayman")
-               end,
-            },            
-            f:push_button {
-               width = 150,
-               title = 'Web: shamurai.com',
-               enabled = true,
-               action = function()
-                  LrHttp.openUrlInBrowser(_G.Shamurai)
-               end,
-            },            
-         },         
-         f:row {
-            f:static_text {
-               title = 'Support: ',
-            },
-            f:static_text {
-               title = _G.Support,
-               width_in_chars = 35,
-               height_in_lines = -1,
-               fill_horizontal = 1,
-            },
-            f:spacer {
-               width = 5,
-            },
-            f:push_button {
-               width = 150,
-               title = LOC '$$$/shamurai/textr/gitdash=Textr on Github',
-               enabled = true,
-               action = function()
-                  LrHttp.openUrlInBrowser(_G.GIT_URL)
-               end,
-            },            
+         },
+         f:separator {
+            fill_horizontal = 1
          },
          f:row {
-            f:static_text {
-               title = 'Donate: ',
+            spacing = f.control_spacing(),
+            f:column {
+               f:static_text {
+                  width = 44,
+                  alignment = 'right',
+                  title = _G.BY_LABEL,
+               },
             },
-            f:static_text {
-               title = _G.Donate,
-               width_in_chars = 35,
-               height_in_lines = -1,
-               fill_horizontal = 1,
+            f:column {
+               f:static_text {
+                  title= LOC 'David A. Shamma.',               
+                  width_in_chars = 37,
+               },
             },
-            f:spacer {
-               width = 5,
-            },            
-            f:push_button {
-               width = 150,
-               title = LOC '$$$/shamurai/textr/donateb=Donate to 100Cameras',
-               enabled = true,
-               action = function()
-                  LrHttp.openUrlInBrowser(_G.DONATE_URL)
-               end,
-            },            
+            f:column {
+               f:push_button {
+                  width = 150,
+                  title = 'Twitter: @ayman',
+                  enabled = true,
+                  action = function()
+                     LrHttp.openUrlInBrowser("http://twitter.com/ayman")
+                  end,
+               },
+            },
+         },
+         f:row {
+            spacing = f.control_spacing(),
+            f:column {
+               f:static_text {
+                  width = 44,
+                  alignment = 'right',                  
+                  title = _G.SUPPORT_LABEL,
+               },
+            },
+            f:column {
+               f:static_text {
+                  title = _G.SUPPORT,
+                  width_in_chars = 37,
+                  height_in_lines = -1,
+                  fill_horizontal = 1,
+               },
+            },
+            f:column {
+               f:push_button {
+                  width = 150,
+                  title = _G.GIT_BUTTON,
+                  enabled = true,
+                  action = function()
+                     LrHttp.openUrlInBrowser(_G.GIT_URL)
+                  end,
+               },
+            },
+         },
+         f:row {
+            spacing = f.control_spacing(),
+            f:column {
+               f:static_text {
+                  width = 44,
+                  alignment = 'right',                  
+                  title = _G.DONATE_LABEL,
+               },
+            },
+            f:column {            
+               f:static_text {
+                  title = _G.DONATE_TEXT,
+                  width_in_chars = 37,
+                  height_in_lines = -1,
+                  fill_horizontal = 1,
+               },
+            },
+            f:column {            
+               f:push_button {
+                  width = 150,
+                  title = _G.DONATE_BUTTON,
+                  enabled = true,
+                  action = function()
+                     LrHttp.openUrlInBrowser(_G.DONATE_URL)
+                  end,
+               },
+            },
          },
       }
    }
 end
 
 function PluginManager.sectionsForBottomOfDialog(viewFactory, properties)
-   local f = LrView.osFactory();   
+   local f = LrView.osFactory();
    return {
       {
-         title = LOC "$$$/shamurai/textr/license=License",
+         title = _G.LICENSE_LABEL,
          bind_to_object = prefs,
          f:row {
             spacing = f:control_spacing(),
             f:static_text {
-               title = "MIT License\n\nCopyright (c) 2017 David A. Shamma\n\nPermission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the \"Software\"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.",
+               title = _G.MIT_LICENSE,
                width_in_chars = 50,
                height_in_lines = -1,
                fill_horizontal = 1,
@@ -242,7 +253,7 @@ function PluginManager.sectionsForBottomOfDialog(viewFactory, properties)
             },
          },
       }
-   }  
+   }
 end
 
 local function endDialog(properties)
