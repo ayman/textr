@@ -7,9 +7,8 @@ annotate metadata for the photos.
 
 This is an experiment right now.  You supply your API key for Google
 Cloud Services and you can select a photo and query Google's API for
-what text might be in the photo.  Currently it displays a dialog box
-with the text.  Eventually, I'd like it to tag or add EXIF data with
-the text (to make it searchable).
+what text might be in the photo.  Found text is added as searchable
+custom metadata.
 
 This came about as I was listening to
 the [PetaPixel Podcast #57][PPP57] and someone had a question about an
@@ -44,11 +43,11 @@ just be aware of this.
 It's not too bad but not totally easy...as of the time I wrote this
 plug-in, [Google had these instructions to follow][apikey].  Do that
 and paste the about 40 character key in the Configuration section of
-the plug-in manager page.  Don't worry, Lightroom will remember it. 
+the plug-in manager page.  Don't worry, Lightroom will remember it.
 
 [apikey]: https://support.google.com/cloud/answer/6158862?hl=en "Google Help Page"
 
-### Thumb size 
+### Thumb size
 
 The plugin sends thumbnails to the cloud for speed and
 performance. Smaller thumbnails will result in less text being
