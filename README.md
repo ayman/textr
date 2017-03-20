@@ -51,8 +51,8 @@ the plug-in manager page.  Don't worry, Lightroom will remember it.
 
 The plugin sends thumbnails to the cloud for speed and
 performance. Smaller thumbnails will result in less text being
-seen. For example, if a bib says "Runner" in a smaller font than the
-number "E12345", the Cloud Vision Api won't get the word 'Runner' if
+seen. For example, if a bib says `Runner` in a smaller font than the
+number `E12345`, the Cloud Vision Api won't get the word `Runner` if
 you pick a smaller thumb.  I'd recommend playing with this setting to
 get the right setting for a batch of photos.
 
