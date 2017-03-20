@@ -68,7 +68,7 @@ cap a run artificially at 500.
 ### Find Regex
 
 This is where it gets fun. If a bib number scheme for a race is just
-numbers, you can set this to only pick up numbers.  Or if its just
+numbers, you can set this to only pick up numbers.  Or if it's just
 text, same deal . It defaults to a mix of numbers and text.  You can
 hover to get a tooltip to help you pick or if you are familiar, you
 can write your own.
@@ -77,7 +77,7 @@ can write your own.
   * *Numbers only:* `^[0-9]+$`
   * *Letters only:* `^[a-zA-Z]+$`
   
-Basically these are the options I put in place.  Note that if its set
+Basically these are the options I put in place.  Note that if it's set
 to letters, other characters (like Chinese or Arabic) won't get picked
 up.
 
@@ -85,8 +85,8 @@ up.
 
 In conjunction with the *Regex*, you can use this setting to say how
 long the bib number should be.  Only strings of this size will be
-returned, if its set to the default of `0`, any size will match.  Keep
-in mind, if a bib is partially hidden by a runner or other
+returned, if it's set to the default of `0`, any size will match.
+Keep in mind, if a bib is partially hidden by a runner or other
 interference, it won't pick up the partial number. So if you set this
 to `4` and have two runners: `1234` and `5678` and the `5` is hidden
 by a runner's hand, the API will find `1234` only...`678` won't be
