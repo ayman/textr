@@ -72,9 +72,11 @@ numbers, you can set this to only pick up numbers.  Or if its just
 text, same deal . It defaults to a mix of numbers and text.  You can
 hover to get a tooltip to help you pick or if you are familiar, you
 can write your own.
+
   * *Letters and numbers:* `^[a-zA-Z0-9]+$`
   * *Numbers only:* `^[0-9]+$`
   * *Letters only:* `^[a-zA-Z]+$`
+  
 Basically these are the options I put in place.  Note that if its set
 to letters, other characters (like Chinese or Arabic) won't get picked
 up.
@@ -88,7 +90,7 @@ in mind, if a bib is partially hidden by a runner or other
 interference, it won't pick up the partial number. So if you set this
 to `4` and have two runners: `1234` and `5678` and the `5` is hidden
 by a runner's hand, the API will find `1234` only...`678` won't be
-tagged by the plugin.
+annotated by the plugin.
 
 ### Running the plug-in
 
