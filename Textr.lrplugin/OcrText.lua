@@ -11,17 +11,20 @@ local JSON = require 'JSON'
 
 local logger = import 'LrLogger'( "Textr" )
 
--- logger:enable( 'print' )
-logger:enable( 'logfile' )
+logger:enable( 'print' )
+-- logger:enable( 'logfile' )
 logger:info( "Loading Textr..." )
 
 local ENDPOINT_URL = "https://vision.googleapis.com/v1/images:annotate"
+-- TODO: make sure this is not the default slug
 local API_KEY = LrPrefs.prefsForPlugin().google_api_key
 local TEXT_LENGTH = tonumber(LrPrefs.prefsForPlugin().text_length)
+
 local ALLOW_REGEX = LrPrefs.prefsForPlugin().allow_regex
 if ALLOW_REGEX == "" then
    ALLOW_REGEX = "^+$"
 end
+
 local IMAGE_SIZE = LrPrefs.prefsForPlugin().img_size
 if IMAGE_SIZE == "0" or IMAGE_SIZE == "" then
    IMAGE_SIZE = "320"
@@ -60,11 +63,11 @@ function makeImageDataArray( dataArray )
    -- TODO: parameterize maxResults
    local img = "{image:{content: \"%s\"},"
    img = img .. "features: [{type:'TEXT_DETECTION', maxResults: 1}]}"
-   local imageData = string.format(img, dataArray[1])
+   local imageData = string.format( img, dataArray[1] )
    for i = 2, #dataArray do
-      imageData = imageData .. "," .. string.format(img, dataArray[i])
+      imageData = imageData .. "," .. string.format( img, dataArray[i] )
    end
-   return string.format("{requests:[%s]}", imageData)
+   return string.format( "{requests:[%s]}", imageData )
 end
 
 --------------------------------------------------------------------------------
@@ -73,10 +76,10 @@ end
 function callPOST( url, data )
    return LrHttp.post(
       url .. "?key=" .. API_KEY,
-      makeImageData(data),
-      {  { field = "Content-Type", value = "application/json" },
-         { field = "User-Agent", value = "Textr Plugin 1.0" },
-         { field = "Cookie", value = "GARBAGE" } } )
+      makeImageData( data ),
+      { { field = "Content-Type", value = "application/json" },
+        { field = "User-Agent", value = "Textr Plugin 1.0" },
+        { field = "Cookie", value = "GARBAGE" } } )
 end
 
 --------------------------------------------------------------------------------
@@ -86,9 +89,9 @@ local function callPOSTArray( url, data )
    return LrHttp.post(
       url .. "?key=" .. API_KEY,
       makeImageDataArray(data),
-      {  { field = "Content-Type", value = "application/json" },
-         { field = "User-Agent", value = "Textr Plugin 1.0" },
-         { field = "Cookie", value = "GARBAGE" } } )
+      { { field = "Content-Type", value = "application/json" },
+        { field = "User-Agent", value = "Textr Plugin 1.0" },
+        { field = "Cookie", value = "GARBAGE" } } )
 end
 
 --------------------------------------------------------------------------------
@@ -98,7 +101,7 @@ LrTasks.startAsyncTask (
    function()
       logger:debug( "Starting Async Task" )
       local progress = LrProgressScope { title="Textr" }
-      progress:setCaption(LOC "$$$/shamurai/textr/fetch=Fetching Catalog")
+      progress:setCaption( LOC "$$$/shamurai/textr/fetch=Fetching Catalog" )
       local catalog = LrApplication.activeCatalog()
       local selectedPhotos = catalog:getTargetPhotos() -- (type: LrPhoto{})
       local minSize = 1
@@ -107,9 +110,9 @@ LrTasks.startAsyncTask (
       if #selectedPhotos > maxSize or #selectedPhotos < minSize then
          local message = LOC '$$$/shamurai/textr/toomany=Too Many (%d photos).'
          local info = LOC '$$$/shamurai/textr/exceeds== %d photos is the max.'
-         LrDialogs.message(string.format(message, #selectedPhotos),
-                           string.format(info, maxSize),
-                           'warning')
+         LrDialogs.message( string.format( message, #selectedPhotos ),
+                            string.format( info, maxSize ),
+                            'warning' )
          return
       end
 
@@ -159,7 +162,7 @@ LrTasks.startAsyncTask (
                   end
                end
             end
-            foundTags[#foundTags + 1] = trim(tagsText)
+            foundTags[#foundTags + 1] = trim( tagsText )
             logger:debugf( "Photo: %s OCR Tag: %s", i, foundTags[i] )            
          end
       end

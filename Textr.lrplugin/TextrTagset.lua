@@ -1,5 +1,5 @@
 return {
-   label  =  LOC  "$$$/Textr/Tagset/Title=My Metadata",
+   label  =  LOC  "$$$/Textr/Tagset/Title=Textr",
    id = 'TextrTagset',
    items = {
       { 'com.adobe.label',

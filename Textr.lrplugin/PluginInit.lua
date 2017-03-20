@@ -1,2 +1,5 @@
 _G.pluginID = "com.shamurai.textr"
 _G.URL = "https://console.cloud.google.com"
+_G.GIT_URL = "https://github.com/ayman/textr"
+_G.Shamurai = "http://shamurai.com"
+_G.support = LOC "$$$/shamurai/textr/support=MIT License. Unsupported. If you use this plugin for work, please make a donation. You can file issues on the Github page but you can also fix them and submit a pull request."
