@@ -2,6 +2,7 @@
 "$$$/shamurai/textr/about=Recognize text in photos using the Google Cloud Vision API and add a searchable field for the photos. This came about as I was listening to the PetaPixel Podcast #57 and someone had a question about an automated way to tag race bib numbers in Lightroom. I thought it shouldn't be that hard to whip up in today's age...and here we are."
 "$$$/shamurai/textr/add=Add OCR Tags"
 "$$$/shamurai/textr/adding=Adding OCR Tags"
+"$$$/shamurai/textr/apikeyempty=API Key is empty! Configure it in the Plug-in Manager."
 "$$$/shamurai/textr/apikeytitle=API Key (CLI)"
 "$$$/shamurai/textr/apitip=Should be a long API key of random letters and numbers."
 "$$$/shamurai/textr/aregex=Find Regex"
@@ -9,6 +10,7 @@
 "$$$/shamurai/textr/bylabel=By"
 "$$$/shamurai/textr/call=Calling Google Cloud"
 "$$$/shamurai/textr/conf=Configuration"
+"$$$/shamurai/textr/ctip=Numbers & Letters: ^[a-zA-Z0-9]+$\nNumbers: ^[0-9]+$\nLetters: ^[a-zA-Z]+$"
 "$$$/shamurai/textr/decode=Decoding JSON" 
 "$$$/shamurai/textr/donateb=Donate: First Exposures"
 "$$$/shamurai/textr/donatel=Donate"
@@ -29,4 +31,5 @@
 "$$$/shamurai/textr/thumbsize=Thumb size"
 "$$$/shamurai/textr/tlength=Matched length"
 "$$$/shamurai/textr/toomany=Too Many (%d photos)."
+
 

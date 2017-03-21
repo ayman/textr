@@ -15,9 +15,13 @@ LOGGER:enable( 'print' )
 LOGGER:info( "Loading Textr..." )
 
 local ENDPOINT_URL = _G.ENDPOINT_URL
--- TODO: make sure this is not the default slug
 local API_KEY = LrPrefs.prefsForPlugin().google_api_key
-local TEXT_LENGTH = tonumber(LrPrefs.prefsForPlugin().text_length)
+if API_KEY == "" or API_KEY == nil then
+   LrDialogs.showError( _G.API_KEY_EMPTY )  
+   return
+end
+
+local TEXT_LENGTH = tonumber( LrPrefs.prefsForPlugin().text_length )
 
 local ALLOW_REGEX = LrPrefs.prefsForPlugin().allow_regex
 if ALLOW_REGEX == "" then
@@ -29,7 +33,7 @@ if IMAGE_SIZE == "0" or IMAGE_SIZE == "" then
    IMAGE_SIZE = "320"
 end
 
-local MAX_IMGS = tonumber(LrPrefs.prefsForPlugin().max_imgs)
+local MAX_IMGS = tonumber( LrPrefs.prefsForPlugin().max_imgs )
 if MAX_IMGS == "0" or IMAGE_SIZE == "" then
    MAX_IMGS = 250
 end
@@ -133,7 +137,7 @@ local result = LrDialogs.presentModalDialog(
                },
                f:combo_box {
                   items = { "^[a-zA-Z0-9]+$", "^[0-9]+$", "^[a-zA-Z]+$" },
-                  tooltip = "Numbers & Letters: ^[a-zA-Z0-9]+$\nNumbers: ^[0-9]+$\nLetters: ^[a-zA-Z]+$",
+                  tooltip = _G.COMBO_TIP,
                   immediate = true,
                   width_in_digits = 14,
                   alignment = 'right',
@@ -173,7 +177,7 @@ else
    LrTasks.startAsyncTask (
       function()
          LOGGER:debug( "Starting Async Task" )
-         local progress = LrProgressScope { title="Textr" }
+         local progress = LrProgressScope { title=_G.PLUGIN_NAME }
          progress:setCaption( _G.FETCHING )
          local catalog = LrApplication.activeCatalog()
          local selectedPhotos = catalog:getTargetPhotos() -- (type: LrPhoto{})
@@ -252,9 +256,7 @@ else
             LOGGER:info( "Textr done" )
          end
          
-         local s = catalog:withWriteAccessDo(
-            _G.ADD,
-            addOcrTags )
+         local s = catalog:withWriteAccessDo( _G.ADD, addOcrTags )
          LOGGER:debug( s )
       end
    )
