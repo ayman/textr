@@ -1,13 +1,14 @@
 return {
-   label  =  LOC  "$$$/Textr/Tagset/Title=Textr",
+   title  = LOC "$$$/shamurai/textr/pluginName=Textr OCR",
    id = 'TextrTagset',
    items = {
-      { 'com.adobe.label',
-        label  =  LOC  "$$$/Metadata/OrigLabel=Standard Metadata"},
+      'com.shamurai.textr.*',
+      'com.adobe.separator',         
+      'com.adobe.title',
+      { 'com.adobe.caption', height_in_lines = 3 },
+      'com.adobe.separator',
+      'com.adobe.dateCreated',
       'com.adobe.filename',
       'com.adobe.folder',
-      'com.adobe.separator',
-      { 'com.adobe.label', label = LOC "$$$/Metadata/CusLabel=Textr" },
-      'com.shamurai.textr.*',
-   },
+   }
 }

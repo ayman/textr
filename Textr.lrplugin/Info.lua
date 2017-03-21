@@ -6,7 +6,7 @@ return {
    LrSdkVersion = 5.0,
 
    LrToolkitIdentifier = 'com.shamurai.textr',
-   LrPluginName = LOC "$$$/shamurai/textr/pluginName=Textr OCR Tagger",
+   LrPluginName = LOC "$$$/shamurai/textr/pluginName=Textr OCR",
 
    LrInitPlugin = 'PluginInit.lua',
 
