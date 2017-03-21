@@ -149,7 +149,7 @@ send me a pull request.
 Thanks to [Adam Hodges][adam] for giving me permission to use his 
 images here. Check him out at [Adam Hodges Photography][adam].
 
-[adam]: Adam Hodges Photography "Adam Hodges Photography"
+[adam]: https://adamhodges.com/ "Adam Hodges Photography"
 
 ## License ##
 
