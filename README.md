@@ -77,9 +77,10 @@ can write your own.
   * *Numbers only:* `^[0-9]+$`
   * *Letters only:* `^[a-zA-Z]+$`
   
-Basically these are the options I put in place.  Note that if it's set
-to letters, other characters (like Chinese or Arabic) won't get picked
-up.
+Basically these are the options I put in place.  You could try
+`^[a-zA-Z][0-9]+$` to pick up a letter followed by a set of numbers
+for example. Note that if it's set to letters, other characters (like
+Chinese or Arabic) won't get picked up.
 
 ### Matched length
 
