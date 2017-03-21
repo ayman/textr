@@ -4,7 +4,7 @@ Recognize text in photos using the Google Cloud Vision API and
 annotate metadata for the photos.
 
 ![Lightroom Screenshot runing Textr plugin](./images/textr.png)
-###### Photos courtesy of [Adam Hodges Photography][adam].
+<p align="right"><small>Photos courtesy of [Adam Hodges Photography][adam].</small></p>
 
 ## About
 
