@@ -3,9 +3,11 @@
 Recognize text in photos using the Google Cloud Vision API and
 annotate metadata for the photos.
 
+![Lightroom Screenshot runing Textr plugin](./images/textr.png)
+
 ## About
 
-This is an experiment right now.  You supply your API key for Google
+This is a small experiment.  You supply your API key for Google
 Cloud Services and you can select a photo and query Google's API for
 what text might be in the photo.  Found text is added as searchable
 custom metadata.
@@ -31,6 +33,8 @@ You do this in the usual manner.  Put the plug-in somewhere you like.
 In the **File** menu, select *Plug-in Manager* and click *Add*.
 
 ### Configuration
+
+![The Plugin Configuration Window](./images/plugin-options.png)
 
 #### API Key (CLI)
 
@@ -100,12 +104,16 @@ annotated by the plugin.
 
 ### Running the plug-in
 
+![The Plugin Configuration Window](./images/menu-options.png)
+
 Select a few photos and go to the **Library** menu and select *Plug-in
-Extras* and select *Textr OCR*.  The plug-in will generate thumbnails
-and then call the cloud in a batch.  The Textr stores a single custom
-metadata string that is searchable but won't clutter your existing
-metadata or keywords.  Text recognition can be kinda noisy, so I
-didn't want to mess up any nice categorization people may have.
+Extras* and select *Textr OCR*.  The settings here are the same as the
+global ones but you can tweak them at runtime. The plug-in will
+generate thumbnails and then call the cloud in a batch.  The Textr
+stores a single custom metadata string that is searchable but won't
+clutter your existing metadata or keywords.  Text recognition can be
+kinda noisy, so I didn't want to mess up any nice categorization
+people may have.
 
 ### Undo Please
 Remember you can **undo** this task when it completes too. Or just
@@ -135,6 +143,13 @@ Google will continue to charge you beyond their free query limit.
 
 It happens. File an issue! Or find an existing issue and fix it and
 send me a pull request.
+
+## Thanks!
+
+Thanks to [Adam Hodges][adam] for giving me permission to use his 
+images here. Check him out at [Adam Hodges Photography][adam].
+
+[adam]: Adam Hodges Photography "Adam Hodges Photography"
 
 ## License ##
 

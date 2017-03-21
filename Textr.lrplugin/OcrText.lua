@@ -125,7 +125,7 @@ local result = LrDialogs.presentModalDialog(
                   max = 4096,
                   alignment = 'right',
                   width_in_digits = 4,
-                  value = prefs.img_size,
+                  value = LrView.bind('img_size'),
                },
                f:static_text {
                   title = _G.ALLOW_REGEX,
