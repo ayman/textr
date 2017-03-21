@@ -1,7 +1,3 @@
--- http://stackoverflow.com/questions/22390994/how-to-create-publish-plugin-for-lightroom
--- http://notebook.kulchenko.com/zerobrane/debugging-lightroom-plugins-zerobrane-studio-ide
--- http://lua-users.org/lists/lua-l/2008-07/msg00206.html
-
 return {
    LrSdkVersion = 5.0,
 
