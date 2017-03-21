@@ -30,7 +30,7 @@ I have a Mac. I assume Windows will be similar. Just a heads up.
 You do this in the usual manner.  Put the plug-in somewhere you like.
 In the **File** menu, select *Plug-in Manager* and click *Add*.
 
-### Plug-in Settings
+### Configuration
 
 #### API Key (CLI)
 
@@ -47,16 +47,7 @@ the plug-in manager page.  Don't worry, Lightroom will remember it.
 
 [apikey]: https://support.google.com/cloud/answer/6158862?hl=en "Google Help Page"
 
-### Thumb size
-
-The plugin sends thumbnails to the cloud for speed and
-performance. Smaller thumbnails will result in less text being
-seen. For example, if a bib says `Runner` in a smaller font than the
-number `E12345`, the Cloud Vision Api won't get the word `Runner` if
-you pick a smaller thumb.  I'd recommend playing with this setting to
-get the right setting for a batch of photos.
-
-### Batch Size
+#### Batch Size
 
 Quite simply, how many can you send to the cloud at once. I put this
 here to limit my runs in the odd case that one accidentally sends
@@ -65,7 +56,21 @@ cost money.  This is *per batch* so you can run several batches and
 exceed this number.  I might kill this setting in the future and just
 cap a run artificially at 500.
 
-### Find Regex
+### Settings 
+
+You can set the settings in the Plug-in Manager or when you run the
+plug-in.
+
+#### Thumb size
+
+The plugin sends thumbnails to the cloud for speed and
+performance. Smaller thumbnails will result in less text being
+seen. For example, if a bib says `Runner` in a smaller font than the
+number `E12345`, the Cloud Vision Api won't get the word `Runner` if
+you pick a smaller thumb.  I'd recommend playing with this setting to
+get the right setting for a batch of photos.
+
+#### Find Regex
 
 This is where it gets fun. If a bib number scheme for a race is just
 numbers, you can set this to only pick up numbers.  Or if it's just
@@ -82,7 +87,7 @@ Basically these are the options I put in place.  You could try
 for example. Note that if it's set to letters, other characters (like
 Chinese or Arabic) won't get picked up.
 
-### Matched length
+#### Matched length
 
 In conjunction with the *Regex*, you can use this setting to say how
 long the bib number should be.  Only strings of this size will be
