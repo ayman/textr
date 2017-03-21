@@ -14,7 +14,7 @@ local LOGGER = import 'LrLogger'( "Textr" )
 LOGGER:enable( 'print' )
 LOGGER:info( "Loading Textr..." )
 
-local ENDPOINT_URL = "https://vision.googleapis.com/v1/images:annotate"
+local ENDPOINT_URL = _G.ENDPOINT_URL
 -- TODO: make sure this is not the default slug
 local API_KEY = LrPrefs.prefsForPlugin().google_api_key
 local TEXT_LENGTH = tonumber(LrPrefs.prefsForPlugin().text_length)
@@ -158,7 +158,7 @@ local result = LrDialogs.presentModalDialog(
             },
          },
       },
-      actionVerb = LOC "$$$/shamurai/textr/ocr=OCR",
+      actionVerb = _G.OCR
    }
 )
 
@@ -174,16 +174,14 @@ else
       function()
          LOGGER:debug( "Starting Async Task" )
          local progress = LrProgressScope { title="Textr" }
-         progress:setCaption( LOC "$$$/shamurai/textr/fetch=Fetching Catalog" )
+         progress:setCaption( _G.FETCHING )
          local catalog = LrApplication.activeCatalog()
          local selectedPhotos = catalog:getTargetPhotos() -- (type: LrPhoto{})
          local minSize = 1
          local maxSize = MAX_IMGS
          if #selectedPhotos > maxSize or #selectedPhotos < minSize then
-            local message = LOC '$$$/shamurai/textr/toomany=Too Many (%d photos).'
-            local info = LOC '$$$/shamurai/textr/exceeds== %d photos is the max.'
-            LrDialogs.message( string.format( message, #selectedPhotos ),
-                               string.format( info, maxSize ),
+            LrDialogs.message( string.format( _G.TOOMANY, #selectedPhotos ),
+                               string.format( _G.EXCEEDS, maxSize ),
                                'warning' )
             return
          end
@@ -202,7 +200,7 @@ else
          end
 
          LOGGER:debug( "Generating Hashes" )
-         progress:setCaption( LOC "$$$/shamurai/textr/hash=Generating Hashes" )
+         progress:setCaption( _G.GEN_HASHES )
          for i = 1, #selectedPhotos do
             local photo = selectedPhotos[i]
             photo:requestJpegThumbnail( IMAGE_SIZE, nil, storeB64 )
@@ -212,10 +210,10 @@ else
 
          -- good ref http://bit.ly/2mVlzTF
          LOGGER:debug( "Calling Google Cloud" )
-         progress:setCaption( LOC "$$$/shamurai/textr/call=Calling Google Cloud" )
+         progress:setCaption( _G.CALL_CLOUD )
          local response = callPOSTArray( ENDPOINT_URL, b64Data )
 
-         progress:setCaption( LOC "$$$/shamurai/textr/decode=Decoding JSON" )
+         progress:setCaption( _G.DECODE )
          local foundTags = {}
          -- LOGGER:debug("response: " .. string.gsub(response, "\n", ""))
          local ocr = JSON:decode( response )
@@ -241,7 +239,7 @@ else
 
          local addOcrTags = function ()
             LOGGER:debug( "Adding OCR Tags" )
-            progress:setCaption( LOC "$$$/shamurai/textr/adding=Adding OCR Tags" )
+            progress:setCaption( _G.ADDING )
             for i = 1, #selectedPhotos do
                selectedPhotos[i]:setPropertyForPlugin( _PLUGIN,
                                                        'textrFoundText',
@@ -255,7 +253,7 @@ else
          end
          
          local s = catalog:withWriteAccessDo(
-            LOC "$$$/shamurai/textr/add=Add OCR Tags",
+            _G.ADD,
             addOcrTags )
          LOGGER:debug( s )
       end
