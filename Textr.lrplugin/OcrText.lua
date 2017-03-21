@@ -51,7 +51,7 @@ end
 function makeImageData( data )
    local d = "{requests:[{image:{content: \""
       .. data
-      .. "\"}, features: [{type:'TEXT_DETECTION', maxResults: 1}]}]}"
+      .. "\"}, features: [{type:'TEXT_DETECTION'}]}]}"
    return d
 end
 
@@ -59,9 +59,8 @@ end
 -- Make JSON post data for array of base 64 image strings.
 
 function makeImageDataArray( dataArray )
-   -- TODO: parameterize maxResults
    local img = "{image:{content: \"%s\"},"
-   img = img .. "features: [{type:'TEXT_DETECTION', maxResults: 1}]}"
+   img = img .. "features: [{type:'TEXT_DETECTION'}]}"
    local imageData = string.format( img, dataArray[1] )
    for i = 2, #dataArray do
       imageData = imageData .. "," .. string.format( img, dataArray[i] )
@@ -76,9 +75,11 @@ function callPOST( url, data )
    return LrHttp.post(
       url .. "?key=" .. API_KEY,
       makeImageData( data ),
-      { { field = "Content-Type", value = "application/json" },
-        { field = "User-Agent", value = "Textr Plugin 1.0" },
-        { field = "Cookie", value = "GARBAGE" } } )
+      {
+         { field = "Content-Type", value = "application/json" },
+         { field = "User-Agent", value = "Textr Plugin 1.0" }
+      }
+   )
 end
 
 --------------------------------------------------------------------------------
@@ -88,9 +89,11 @@ local function callPOSTArray( url, data )
    return LrHttp.post(
       url .. "?key=" .. API_KEY,
       makeImageDataArray(data),
-      { { field = "Content-Type", value = "application/json" },
-        { field = "User-Agent", value = "Textr Plugin 1.0" },
-        { field = "Cookie", value = "GARBAGE" } } )
+      {
+         { field = "Content-Type", value = "application/json" },
+         { field = "User-Agent", value = "Textr Plugin 1.0" }
+      }
+   )
 end
 
 --------------------------------------------------------------------------------
@@ -208,13 +211,13 @@ else
          end
 
          -- good ref http://bit.ly/2mVlzTF
-         -- https://forums.adobe.com/message/3948416#3948416
          LOGGER:debug( "Calling Google Cloud" )
          progress:setCaption( LOC "$$$/shamurai/textr/call=Calling Google Cloud" )
          local response = callPOSTArray( ENDPOINT_URL, b64Data )
 
          progress:setCaption( LOC "$$$/shamurai/textr/decode=Decoding JSON" )
          local foundTags = {}
+         -- LOGGER:debug("response: " .. string.gsub(response, "\n", ""))
          local ocr = JSON:decode( response )
          for i = 1, #ocr.responses do
             local annotations = ocr.responses[i].textAnnotations
