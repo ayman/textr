@@ -95,8 +95,6 @@ local function callPOSTArray( url, data )
 end
 
 --------------------------------------------------------------------------------
--- Write trace information to the logger.
--- example http://bit.ly/2mVlzTF
 LrTasks.startAsyncTask (
    function()
       logger:debug( "Starting Async Task" )
@@ -150,17 +148,17 @@ LrTasks.startAsyncTask (
       for i = 1, #ocr.responses do
          local annotations = ocr.responses[i].textAnnotations
          if annotations ~= nil then
-            local tagsText = ""
+            local tagsSet = {}
             for i, text in ipairs( annotations ) do
                if string.match( text.description, ALLOW_REGEX ) then
-                  if TEXT_LENGTH <= 0 then
-                     tagsText = tagsText .. text.description .. " "
-                  elseif  #text.description == TEXT_LENGTH  then
-                     tagsText = tagsText .. text.description .. " "
-                  else
-                     tagsText = ""
+                  if TEXT_LENGTH <= 0 or #text.description == TEXT_LENGTH then
+                     tagsSet[trim(text.description)] = true
                   end
                end
+            end
+            local tagsText = ""
+            for key, value in pairs(tagsSet) do
+               tagsText = tagsText .. " " .. key
             end
             foundTags[#foundTags + 1] = trim( tagsText )
             logger:debugf( "Photo: %s OCR Tag: %s", i, foundTags[i] )            
