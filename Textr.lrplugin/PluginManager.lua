@@ -1,8 +1,6 @@
+local LrHttp = import "LrHttp"
 local LrPrefs = import 'LrPrefs'
 local LrView = import "LrView"
-local LrHttp = import "LrHttp"
-local bind = import "LrBinding"
-local app = import 'LrApplication'
 
 local function getOrDefault(value, default)
    if value == nil then
@@ -83,6 +81,9 @@ function PluginManager.sectionsForTopOfDialog(viewFactory, properties)
                   end,
                },
             },
+         },
+         f:group_box {
+            title = _G.SETTINGS,         
             f:row {
                spacing = f:control_spacing(),
                f:static_text {
@@ -99,23 +100,6 @@ function PluginManager.sectionsForTopOfDialog(viewFactory, properties)
                   alignment = 'right',
                   width_in_digits = 4,
                   value = LrView.bind('img_size'),
-               },
-               f:static_text {
-                  title = _G.BATCHSIZE,
-                  alignment = 'left',
-               },
-               f:edit_field {
-                  immediate = true,
-                  increment = 1,
-                  large_increment = 10,
-                  string_to_value = getInt,
-                  validate = getValidInt,
-                  precision = 0,
-                  min = 1,
-                  max = 1000,
-                  alignment = 'right',
-                  width_in_digits = 3,
-                  value = LrView.bind('max_imgs'),
                },
                f:static_text {
                   title = _G.ALLOW_REGEX,
@@ -145,6 +129,23 @@ function PluginManager.sectionsForTopOfDialog(viewFactory, properties)
                   width_in_digits = 3,
                   value = LrView.bind('text_length'),
                },
+               f:static_text {
+                  title = _G.BATCHSIZE,
+                  alignment = 'left',
+               },
+               f:edit_field {
+                  immediate = true,
+                  increment = 1,
+                  large_increment = 10,
+                  string_to_value = getInt,
+                  validate = getValidInt,
+                  precision = 0,
+                  min = 1,
+                  max = 1000,
+                  alignment = 'right',
+                  width_in_digits = 3,
+                  value = LrView.bind('max_imgs'),
+               },               
             },
          },
          f:separator {

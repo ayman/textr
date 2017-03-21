@@ -1,19 +1,18 @@
 local LrApplication = import 'LrApplication'
 local LrDialogs = import 'LrDialogs'
-local LrTasks = import 'LrTasks'
 local LrHttp = import 'LrHttp'
-local LrStringUtils = import 'LrStringUtils'
-local LrView = import 'LrView'
 local LrPrefs = import 'LrPrefs'
 local LrProgressScope = import 'LrProgressScope'
+local LrStringUtils = import 'LrStringUtils'
+local LrTasks = import 'LrTasks'
+local LrView = import 'LrView'
 
 local JSON = require 'JSON'
+local LOGGER = import 'LrLogger'( "Textr" )
 
-local logger = import 'LrLogger'( "Textr" )
-
-logger:enable( 'print' )
--- logger:enable( 'logfile' )
-logger:info( "Loading Textr..." )
+-- write to MacOS Console:system.log
+LOGGER:enable( 'print' )
+LOGGER:info( "Loading Textr..." )
 
 local ENDPOINT_URL = "https://vision.googleapis.com/v1/images:annotate"
 -- TODO: make sure this is not the default slug
@@ -95,94 +94,167 @@ local function callPOSTArray( url, data )
 end
 
 --------------------------------------------------------------------------------
-LrTasks.startAsyncTask (
-   function()
-      logger:debug( "Starting Async Task" )
-      local progress = LrProgressScope { title="Textr" }
-      progress:setCaption( LOC "$$$/shamurai/textr/fetch=Fetching Catalog" )
-      local catalog = LrApplication.activeCatalog()
-      local selectedPhotos = catalog:getTargetPhotos() -- (type: LrPhoto{})
-      local minSize = 1
-      local maxSize = MAX_IMGS
-      -- not too many for now
-      if #selectedPhotos > maxSize or #selectedPhotos < minSize then
-         local message = LOC '$$$/shamurai/textr/toomany=Too Many (%d photos).'
-         local info = LOC '$$$/shamurai/textr/exceeds== %d photos is the max.'
-         LrDialogs.message( string.format( message, #selectedPhotos ),
-                            string.format( info, maxSize ),
-                            'warning' )
-         return
-      end
+-- Execution block.
 
-      -- set an array in scope to hold the base 64 data
-      local b64Data = {}
+local f = LrView.osFactory()
+local prefs = LrPrefs.prefsForPlugin();
+local result = LrDialogs.presentModalDialog(
+   {
+      title = _G.PLUGIN_NAME,
+      resizeable = false,
+      contents = f:column {
+         bind_to_object = prefs,         
+         f:group_box {
+            title = _G.SETTINGS,   
+            f:row {
+               spacing = f:control_spacing(),
+               f:static_text {
+                  title = _G.THUMBSIZE,
+                  alignment = 'left',
+               },
+               f:edit_field {
+                  immediate = true,
+                  string_to_value = getInt,
+                  increment = 32,
+                  large_increment = 640,
+                  precision = 0,
+                  min = 32,
+                  max = 4096,
+                  alignment = 'right',
+                  width_in_digits = 4,
+                  value = prefs.img_size,
+               },
+               f:static_text {
+                  title = _G.ALLOW_REGEX,
+                  alignment = 'left',
+               },
+               f:combo_box {
+                  items = { "^[a-zA-Z0-9]+$", "^[0-9]+$", "^[a-zA-Z]+$" },
+                  tooltip = "Numbers & Letters: ^[a-zA-Z0-9]+$\nNumbers: ^[0-9]+$\nLetters: ^[a-zA-Z]+$",
+                  immediate = true,
+                  width_in_digits = 14,
+                  alignment = 'right',
+                  value = LrView.bind('allow_regex'),
+               },
+               f:static_text {
+                  title = _G.MATCHED_LENGTH,
+                  alignment = 'left',
+               },
+               f:edit_field {
+                  increment = 1,
+                  large_increment = 2,
+                  immediate = true,
+                  string_to_value = getInt,
+                  precision = 0,
+                  min = 0,
+                  max = 10,
+                  alignment = 'right',
+                  width_in_digits = 3,
+                  value = LrView.bind('text_length'),
+               },      
+            },
+         },
+      },
+      actionVerb = LOC "$$$/shamurai/textr/ocr=OCR",
+   }
+)
 
-      -- callback function to store encoded images
-      local storeB64 = function( jpg, err )
-         if err == nil then
-            -- we should prob store like the filename and the b64 data
-            b64Data[#b64Data + 1] = LrStringUtils.encodeBase64( jpg )
-         else
-            b64Data[#b64Data + 1] = ""
+if result ~= 'ok' then
+   prefs.img_size = IMAGE_SIZE
+   prefs.allow_regex = ALLOW_REGEX
+   prefs.text_length = TEXT_LENGTH
+else
+   IMAGE_SIZE = tonumber(prefs.img_size)
+   ALLOW_REGEX = prefs.allow_regex
+   TEXT_LENGTH = tonumber(prefs.text_length)
+   LrTasks.startAsyncTask (
+      function()
+         LOGGER:debug( "Starting Async Task" )
+         local progress = LrProgressScope { title="Textr" }
+         progress:setCaption( LOC "$$$/shamurai/textr/fetch=Fetching Catalog" )
+         local catalog = LrApplication.activeCatalog()
+         local selectedPhotos = catalog:getTargetPhotos() -- (type: LrPhoto{})
+         local minSize = 1
+         local maxSize = MAX_IMGS
+         if #selectedPhotos > maxSize or #selectedPhotos < minSize then
+            local message = LOC '$$$/shamurai/textr/toomany=Too Many (%d photos).'
+            local info = LOC '$$$/shamurai/textr/exceeds== %d photos is the max.'
+            LrDialogs.message( string.format( message, #selectedPhotos ),
+                               string.format( info, maxSize ),
+                               'warning' )
+            return
          end
-      end
 
-      logger:debug( "Generating Hashes" )
-      progress:setCaption( LOC "$$$/shamurai/textr/hash=Generating Hashes" )
-      for i = 1, #selectedPhotos do
-         local photo = selectedPhotos[i]
-         photo:requestJpegThumbnail( IMAGE_SIZE, nil, storeB64 )
-         progress:setPortionComplete( i, 2 * #selectedPhotos )
-         LrTasks.yield()
-      end
+         -- set an array in scope to hold the base 64 data
+         local b64Data = {}
 
-      -- good ref http://bit.ly/2mVlzTF
-      -- https://forums.adobe.com/message/3948416#3948416
-      logger:debug( "Calling Google Cloud" )
-      progress:setCaption( LOC "$$$/shamurai/textr/call=Calling Google Cloud" )
-      local response = callPOSTArray( ENDPOINT_URL, b64Data )
+         -- callback function to store encoded images
+         local storeB64 = function( jpg, err )
+            if err == nil then
+               -- we should prob store like the filename and the b64 data
+               b64Data[#b64Data + 1] = LrStringUtils.encodeBase64( jpg )
+            else
+               b64Data[#b64Data + 1] = ""
+            end
+         end
 
-      progress:setCaption( LOC "$$$/shamurai/textr/decode=Decoding JSON" )
-      local foundTags = {}
-      local ocr = JSON:decode( response )
-      for i = 1, #ocr.responses do
-         local annotations = ocr.responses[i].textAnnotations
-         if annotations ~= nil then
-            local tagsSet = {}
-            for i, text in ipairs( annotations ) do
-               if string.match( text.description, ALLOW_REGEX ) then
-                  if TEXT_LENGTH <= 0 or #text.description == TEXT_LENGTH then
-                     tagsSet[trim(text.description)] = true
+         LOGGER:debug( "Generating Hashes" )
+         progress:setCaption( LOC "$$$/shamurai/textr/hash=Generating Hashes" )
+         for i = 1, #selectedPhotos do
+            local photo = selectedPhotos[i]
+            photo:requestJpegThumbnail( IMAGE_SIZE, nil, storeB64 )
+            progress:setPortionComplete( i, 2 * #selectedPhotos )
+            LrTasks.yield()
+         end
+
+         -- good ref http://bit.ly/2mVlzTF
+         -- https://forums.adobe.com/message/3948416#3948416
+         LOGGER:debug( "Calling Google Cloud" )
+         progress:setCaption( LOC "$$$/shamurai/textr/call=Calling Google Cloud" )
+         local response = callPOSTArray( ENDPOINT_URL, b64Data )
+
+         progress:setCaption( LOC "$$$/shamurai/textr/decode=Decoding JSON" )
+         local foundTags = {}
+         local ocr = JSON:decode( response )
+         for i = 1, #ocr.responses do
+            local annotations = ocr.responses[i].textAnnotations
+            if annotations ~= nil then
+               local tagsSet = {}
+               for i, text in ipairs( annotations ) do
+                  if string.match( text.description, ALLOW_REGEX ) then
+                     if TEXT_LENGTH <= 0 or #text.description == TEXT_LENGTH then
+                        tagsSet[trim(text.description)] = true
+                     end
                   end
                end
+               local tagsText = ""
+               for key, value in pairs(tagsSet) do
+                  tagsText = tagsText .. " " .. key
+               end
+               foundTags[#foundTags + 1] = trim( tagsText )
+               LOGGER:debugf( "Photo: %s OCR Tag: %s", i, foundTags[i] )            
             end
-            local tagsText = ""
-            for key, value in pairs(tagsSet) do
-               tagsText = tagsText .. " " .. key
-            end
-            foundTags[#foundTags + 1] = trim( tagsText )
-            logger:debugf( "Photo: %s OCR Tag: %s", i, foundTags[i] )            
          end
-      end
 
-      local addOcrTags = function ()
-         logger:debug( "Adding OCR Tags" )
-         progress:setCaption( LOC "$$$/shamurai/textr/adding=Adding OCR Tags" )
-         for i = 1, #selectedPhotos do
-            selectedPhotos[i]:setPropertyForPlugin( _PLUGIN,
-                                                    'textrFoundText',
-                                                    foundTags[i] )
-            progress:setPortionComplete( #selectedPhotos + i,
-                                         2 * #selectedPhotos )
-            logger:debugf( "Photo: %s OCR Tag: %s", i, foundTags[i] )
+         local addOcrTags = function ()
+            LOGGER:debug( "Adding OCR Tags" )
+            progress:setCaption( LOC "$$$/shamurai/textr/adding=Adding OCR Tags" )
+            for i = 1, #selectedPhotos do
+               selectedPhotos[i]:setPropertyForPlugin( _PLUGIN,
+                                                       'textrFoundText',
+                                                       foundTags[i] )
+               progress:setPortionComplete( #selectedPhotos + i,
+                                            2 * #selectedPhotos )
+               LOGGER:debugf( "Photo: %s OCR Tag: %s", i, foundTags[i] )
+            end
+            progress:done()
+            LOGGER:info( "Textr done" )
          end
-         progress:done()
-         logger:info( "Textr done" )
+         
+         local s = catalog:withWriteAccessDo(
+            LOC "$$$/shamurai/textr/add=Add OCR Tags",
+            addOcrTags )
+         LOGGER:debug( s )
       end
-      
-      local s = catalog:withWriteAccessDo(
-         LOC "$$$/shamurai/textr/add=Add OCR Tags",
-         addOcrTags )
-      logger:debug( s )
-   end
-)
+   )
+end
