@@ -3,7 +3,7 @@ _G.ABOUT_TEXT = LOC "$$$/shamurai/textr/about=Recognize text in photos using the
 _G.ALLOW_REGEX = LOC '$$$/shamurai/textr/aregex=Find Regex'
 _G.API_KEY_TITLE = LOC '$$$/shamurai/textr/apikeytitle=API Key (CLI)'
 _G.API_TIP = LOC "$$$/shamurai/textr/apitip=Should be a long API key of random letters and numbers."
-_G.BATCHSIZE = LOC '$$$/shamurai/textr/batchsize=Batch size'
+_G.BATCHSIZE = LOC '$$$/shamurai/textr/batchsize=Maximum Batch Size'
 _G.BY_LABEL = LOC '$$$/shamurai/textr/bylabel=By'
 _G.CONF = LOC "$$$/shamurai/textr/conf=Configuration"
 _G.DONATE_BUTTON = LOC '$$$/shamurai/textr/donateb=Donate: First Exposures'

@@ -47,7 +47,7 @@ the plug-in manager page.  Don't worry, Lightroom will remember it.
 
 [apikey]: https://support.google.com/cloud/answer/6158862?hl=en "Google Help Page"
 
-#### Batch Size
+#### Maximum Batch Size
 
 Quite simply, how many can you send to the cloud at once. I put this
 here to limit my runs in the odd case that one accidentally sends
