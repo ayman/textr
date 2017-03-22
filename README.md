@@ -162,7 +162,7 @@ The [Bay To Breakers Storm Troopers photo][b2b] is my own.
 
 [adam]: https://adamhodges.com/ "Adam Hodges Photography"
 
-[b2b]: Bay To Breakers Storm Troopers photo "Bay to breakers 2007"
+[b2b]: https://www.flickr.com/photos/ayman/506142694/ "Bay to Breakers 2007"
 
 ## License ##
 
