@@ -164,3 +164,10 @@ images here. Check him out at [Adam Hodges Photography][adam].
 This code is under the MIT License permissive license.  You can do
 anything you want with the code, just cite me back and I'm not liable
 for anything.  FTR, I tested this on about 20 photos. Just saying. 
+
+Portions of this code (the `JSON.lua` package) are under CC-BY license
+by [Jeffrey Friedl](http://regex.info/blog/lua/json).  There are a ton
+of [Lua JSON modules](http://lua-users.org/wiki/JsonModules) but I
+went with Friedl's because he makes
+some
+[amazing Lightroom goodies](http://regex.info/blog/lightroom-goodies).
