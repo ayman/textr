@@ -145,9 +145,8 @@ under a nice MIT License. Google gives you some queries for free, then
 you have to pay them for more.  If you like this plug-in (especially
 if this helps your business out)...send a donation to this nice
 non-profit (pay it forward yo).  I'm not going to limit or cripple the
-plug-in.  Just if you like it, send a donation. 🙂 Sorry
-to say, Google will continue to charge you beyond their free query
-limit.
+plug-in.  Just if you like it, send a donation. 🙂 Sorry to say,
+Google will continue to charge you beyond their free query limit.
 
 [FirstExposures]: http://www.firstexposures.org/ "Donate please!"
 
@@ -158,8 +157,8 @@ send me a pull request.
 
 ## Thanks!
 
-Thanks to Adam Hodges for giving me permission to use his
-sports images here; check him out at [Adam Hodges Photography][adam].
+Thanks to Adam Hodges for giving me permission to use his sports
+images here; check him out at [Adam Hodges Photography][adam].
 The [Bay To Breakers Storm Troopers photo][b2b] is my own.
 
 [adam]: https://adamhodges.com/ "Adam Hodges Photography"
