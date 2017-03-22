@@ -5,15 +5,14 @@ annotate metadata for the photos.
 
 ![Lightroom Screenshot runing Textr plugin](./images/textr.png) <p
 align="right">Photos courtesy of <a
-href="https://adamhodges.com/">Adam Hodges
-Photography</a>.</p>
+href="https://adamhodges.com/">Adam Hodges Photography</a>.</p>
 
-## About
+## About ##
 
-This is a small experiment.  You supply your API key for Google
-Cloud Services and you can select a photo and query Google's API for
-what text might be in the photo.  Found text is added as searchable
-custom metadata.
+This is a small experiment.  You supply your API key for Google Cloud
+Services and you can select a photo and query Google's API for what
+text might be in the photo.  Found text is added as searchable custom
+metadata.
 
 This came about as I was listening to
 the [PetaPixel Podcast #57][PPP57] and someone had a question about an
@@ -21,12 +20,12 @@ automated way to tag race bib numbers in Lightroom.  Sharky said it
 wasn't something he heard of.  I thought it shouldn't be that hard to
 whip up in today's age...and here we are.
 
-[PPP57]: https://petapixel.com/2016/03/20/ep-57-strobist-david-hobby-sticks-consumers/
+[PPP57]: https://petapixel.com/2016/03/20/ep-57-strobist-david-hobby-sticks-consumers/ "Peta Pixel Podcast where OCR gets asked."
 
 There are a few settings for the plug-in which you'll have to
 tune. I'll get to those later.  In the screenshot above it doesn't
 pick up the jersey words or any words or letters that are kinda
-tilted.  I assume Google's Cloud Vision will get better over time, but
+tilted.  I assume Google Cloud Vision will get better over time, but
 for now, bib numbers and text in general should be *mostly* upright to
 work.
 
@@ -46,8 +45,13 @@ In the **File** menu, select *Plug-in Manager* and click *Add*.
 #### API Key (CLI)
 
 You need this to use the Google Cloud Vision API.  They give you a few
-hundred queries for free, *then they start charging you*.  Not much but
-just be aware of this.
+hundred queries for free, *then they start charging you*.  Not much
+but just be aware of this.  They have
+a [pricing calculator](https://cloud.google.com/pricing/) which as of
+March 2017 states if you did 10k individual images in one day it would
+cost less than a dollar. The plug-in with batch request multiple
+photos selected into one call, I'm not sure if they charge by image or
+by call.  Do read up yourself as they might change how it works.
 
 ##### How to get an API key for Google Cloud Services
 
