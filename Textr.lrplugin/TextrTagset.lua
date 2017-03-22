@@ -3,7 +3,7 @@ return {
    id = 'TextrTagset',
    items = {
       'com.shamurai.textr.*',
-      'com.adobe.separator',         
+      'com.adobe.separator',
       'com.adobe.title',
       { 'com.adobe.caption', height_in_lines = 3 },
       'com.adobe.separator',

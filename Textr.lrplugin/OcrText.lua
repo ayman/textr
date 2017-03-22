@@ -17,7 +17,7 @@ LOGGER:info( "Loading Textr..." )
 local ENDPOINT_URL = _G.ENDPOINT_URL
 local API_KEY = LrPrefs.prefsForPlugin().google_api_key
 if API_KEY == "" or API_KEY == nil then
-   LrDialogs.showError( _G.API_KEY_EMPTY )  
+   LrDialogs.showError( _G.API_KEY_EMPTY )
    return
 end
 
@@ -38,10 +38,6 @@ if MAX_IMGS == "0" or IMAGE_SIZE == "" then
    MAX_IMGS = 250
 end
 
-local ALPHANUMERIC = "^[a-zA-Z0-9]+$"
-local NUMERIC = "^[0-9]+$"
-local ALPHA = "^[a-zA-Z]+$"
-
 --------------------------------------------------------------------------------
 -- Trim text
 
@@ -52,17 +48,17 @@ end
 --------------------------------------------------------------------------------
 -- Make JSON post data for one base 64 image string.
 
-function makeImageData( data )
-   local d = "{requests:[{image:{content: \""
-      .. data
-      .. "\"}, features: [{type:'TEXT_DETECTION'}]}]}"
-   return d
-end
+-- local function makeImageData( data )
+--    local d = "{requests:[{image:{content: \""
+--       .. data
+--       .. "\"}, features: [{type:'TEXT_DETECTION'}]}]}"
+--    return d
+-- end
 
 --------------------------------------------------------------------------------
 -- Make JSON post data for array of base 64 image strings.
 
-function makeImageDataArray( dataArray )
+local function makeImageDataArray( dataArray )
    local img = "{image:{content: \"%s\"},"
    img = img .. "features: [{type:'TEXT_DETECTION'}]}"
    local imageData = string.format( img, dataArray[1] )
@@ -75,16 +71,16 @@ end
 --------------------------------------------------------------------------------
 -- Simple call HTTP POST with url and data.
 
-function callPOST( url, data )
-   return LrHttp.post(
-      url .. "?key=" .. API_KEY,
-      makeImageData( data ),
-      {
-         { field = "Content-Type", value = "application/json" },
-         { field = "User-Agent", value = "Textr Plugin 1.0" }
-      }
-   )
-end
+-- local function callPOST( url, data )
+--    return LrHttp.post(
+--       url .. "?key=" .. API_KEY,
+--       makeImageData( data ),
+--       {
+--          { field = "Content-Type", value = "application/json" },
+--          { field = "User-Agent", value = "Textr Plugin 1.0" }
+--       }
+--    )
+-- end
 
 --------------------------------------------------------------------------------
 -- Simple call HTTP POST with url and data array.
@@ -101,6 +97,12 @@ local function callPOSTArray( url, data )
 end
 
 --------------------------------------------------------------------------------
+
+local function getInt( v, s )
+   return math.floor(tonumber(s))
+end
+
+--------------------------------------------------------------------------------
 -- Execution block.
 
 local f = LrView.osFactory()
@@ -110,9 +112,9 @@ local result = LrDialogs.presentModalDialog(
       title = _G.PLUGIN_NAME,
       resizeable = false,
       contents = f:column {
-         bind_to_object = prefs,         
+         bind_to_object = prefs,
          f:group_box {
-            title = _G.SETTINGS,   
+            title = _G.SETTINGS,
             f:row {
                spacing = f:control_spacing(),
                f:static_text {
@@ -158,7 +160,7 @@ local result = LrDialogs.presentModalDialog(
                   alignment = 'right',
                   width_in_digits = 3,
                   value = LrView.bind('text_length'),
-               },      
+               },
             },
          },
       },
@@ -167,6 +169,7 @@ local result = LrDialogs.presentModalDialog(
 )
 
 if result ~= 'ok' then
+   -- Cancelled, put our variables back like they were.
    prefs.img_size = IMAGE_SIZE
    prefs.allow_regex = ALLOW_REGEX
    prefs.text_length = TEXT_LENGTH
@@ -180,7 +183,7 @@ else
          local progress = LrProgressScope { title=_G.PLUGIN_NAME }
          progress:setCaption( _G.FETCHING )
          local catalog = LrApplication.activeCatalog()
-         local selectedPhotos = catalog:getTargetPhotos() -- (type: LrPhoto{})
+         local selectedPhotos = catalog:getTargetPhotos()
          local minSize = 1
          local maxSize = MAX_IMGS
          if #selectedPhotos > maxSize or #selectedPhotos < minSize then
@@ -225,7 +228,7 @@ else
             local annotations = ocr.responses[i].textAnnotations
             if annotations ~= nil then
                local tagsSet = {}
-               for i, text in ipairs( annotations ) do
+               for j, text in ipairs( annotations ) do
                   if string.match( text.description, ALLOW_REGEX ) then
                      if TEXT_LENGTH <= 0 or #text.description == TEXT_LENGTH then
                         tagsSet[trim(text.description)] = true
@@ -233,11 +236,11 @@ else
                   end
                end
                local tagsText = ""
-               for key, value in pairs(tagsSet) do
+               for key in pairs(tagsSet) do
                   tagsText = tagsText .. " " .. key
                end
                foundTags[#foundTags + 1] = trim( tagsText )
-               LOGGER:debugf( "Photo: %s OCR Tag: %s", i, foundTags[i] )            
+               LOGGER:debugf( "Photo: %s OCR Tag: %s", i, foundTags[i] )
             end
          end
 
@@ -255,7 +258,7 @@ else
             progress:done()
             LOGGER:info( "Textr done" )
          end
-         
+
          local s = catalog:withWriteAccessDo( _G.ADD, addOcrTags )
          LOGGER:debug( s )
       end

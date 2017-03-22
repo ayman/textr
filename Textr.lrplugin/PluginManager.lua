@@ -1,3 +1,4 @@
+local LrColor = import  "LrColor"
 local LrHttp = import "LrHttp"
 local LrPrefs = import 'LrPrefs'
 local LrView = import "LrView"
@@ -16,7 +17,7 @@ end
 PluginManager = {}
 
 function PluginManager.sectionsForTopOfDialog(viewFactory, properties)
-   local f = LrView.osFactory();
+   local f = viewFactory;
    local prefs = LrPrefs.prefsForPlugin();
 
    if (prefs.text_length == nil or
@@ -42,20 +43,54 @@ function PluginManager.sectionsForTopOfDialog(viewFactory, properties)
       {
          title = _G.plugin_name,
          bind_to_object = prefs,
-         f:group_box {
-            title = _G.ABOUT,
-            f:row {
+         f:row {
+            fill_horizontal = 1,
+            f:column {
+               spacing = f:control_spacing(),
+               f:picture {
+                  -- http://www.flickr.com/photos/ayman/506142694/
+                  value = _PLUGIN:resourceId( 'TextrLogo.png' ),
+                  frame_width = 1,
+                  frame_color = LrColor( 0, 0, 0 ),
+                  tooltip = "From Bay to Breakers 2007, San Francisco",
+                  visible = true,
+                  fill_vertical = 1,
+               },
+            },
+            f:column {
+               spacing = f:control_spacing(),
+               f:static_text {
+                  title = _G.PLUGIN_NAME,
+                  font = "<system/bold>",
+                  alignment = 'left',
+                  size = 'regular'
+               },
+               f:row {
+                  f:static_text {
+                     title = _G.BY_LABEL .. ' David A. Shamma',
+                     fill_horizontal = 1,
+                  },
+                  f:push_button {
+                     width = 160,
+                     title = 'Twitter: @ayman',
+                     enabled = true,
+                     action = function()
+                        LrHttp.openUrlInBrowser("http://twitter.com/ayman")
+                     end,
+                  },
+               },
                f:static_text {
                   title = _G.ABOUT_TEXT,
                   alignment = 'left',
-                  width_in_chars = 58,
+                  width = 325,
                   height_in_lines = -1,
-                  fill_horizontal = 1,
+                  fill_horizontal = -1,
                },
             },
          },
          f:group_box {
             title = _G.CONF,
+            fill_horizontal = 1,
             f:row {
                spacing = f:control_spacing(),
                f:static_text {
@@ -102,7 +137,8 @@ function PluginManager.sectionsForTopOfDialog(viewFactory, properties)
             },
          },
          f:group_box {
-            title = _G.SETTINGS,         
+            title = _G.SETTINGS,
+            fill_horizontal = 1,
             f:row {
                spacing = f:control_spacing(),
                f:static_text {
@@ -129,6 +165,7 @@ function PluginManager.sectionsForTopOfDialog(viewFactory, properties)
                   tooltip = "Numbers & Letters: ^[a-zA-Z0-9]+$\nNumbers: ^[0-9]+$\nLetters: ^[a-zA-Z]+$",
                   immediate = true,
                   width_in_digits = 14,
+                  fill_horizontal = 1,
                   alignment = 'right',
                   value = LrView.bind('allow_regex'),
                },
@@ -153,38 +190,38 @@ function PluginManager.sectionsForTopOfDialog(viewFactory, properties)
          f:separator {
             fill_horizontal = 1
          },
+         -- f:row {
+         --    spacing = f.control_spacing(),
+         --    f:column {
+         --       f:static_text {
+         --          width = 44,
+         --          alignment = 'right',
+         --          title = _G.BY_LABEL,
+         --       },
+         --    },
+         --    f:column {
+         --       f:static_text {
+         --          title= LOC 'David A. Shamma.',
+         --          width_in_chars = 37,
+         --       },
+         --    },
+         --    f:column {
+         --       f:push_button {
+         --          width = 150,
+         --          title = 'Twitter: @ayman',
+         --          enabled = true,
+         --          action = function()
+         --             LrHttp.openUrlInBrowser("http://twitter.com/ayman")
+         --          end,
+         --       },
+         --    },
+         -- },
          f:row {
             spacing = f.control_spacing(),
             f:column {
                f:static_text {
                   width = 44,
                   alignment = 'right',
-                  title = _G.BY_LABEL,
-               },
-            },
-            f:column {
-               f:static_text {
-                  title= LOC 'David A. Shamma.',               
-                  width_in_chars = 37,
-               },
-            },
-            f:column {
-               f:push_button {
-                  width = 150,
-                  title = 'Twitter: @ayman',
-                  enabled = true,
-                  action = function()
-                     LrHttp.openUrlInBrowser("http://twitter.com/ayman")
-                  end,
-               },
-            },
-         },
-         f:row {
-            spacing = f.control_spacing(),
-            f:column {
-               f:static_text {
-                  width = 44,
-                  alignment = 'right',                  
                   title = _G.SUPPORT_LABEL,
                },
             },
@@ -212,11 +249,11 @@ function PluginManager.sectionsForTopOfDialog(viewFactory, properties)
             f:column {
                f:static_text {
                   width = 44,
-                  alignment = 'right',                  
+                  alignment = 'right',
                   title = _G.DONATE_LABEL,
                },
             },
-            f:column {            
+            f:column {
                f:static_text {
                   title = _G.DONATE_TEXT,
                   width_in_chars = 37,
@@ -224,7 +261,7 @@ function PluginManager.sectionsForTopOfDialog(viewFactory, properties)
                   fill_horizontal = 1,
                },
             },
-            f:column {            
+            f:column {
                f:push_button {
                   width = 150,
                   title = _G.DONATE_BUTTON,
