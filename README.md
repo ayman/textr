@@ -4,8 +4,8 @@ Recognize text in photos using the Google Cloud Vision API and
 annotate metadata for the photos.
 
 ![Lightroom Screenshot runing Textr plugin](./images/textr.png) 
-<span align="right">Photos courtesy of <a
-href="https://adamhodges.com/">Adam Hodges Photography</a>.</span>
+<p align="right">Photos courtesy of <a
+href="https://adamhodges.com/">Adam Hodges Photography</a>.</p>
 
 ## About ##
 
@@ -41,6 +41,7 @@ In the **File** menu, select *Plug-in Manager* and click *Add*.
 ### Configuration
 
 ![The Plugin Configuration Window](./images/plugin-options.png)
+<p align="right">That's a dead key...just saying.</p>
 
 #### API Key (CLI)
 
@@ -114,7 +115,6 @@ annotated by the plugin.
 ### Running the plug-in
 
 ![The Plugin Configuration Window](./images/menu-options.png)
-<span align="right">That's a dead key...just saying.</span>
 
 Select a few photos and go to the **Library** menu and select *Plug-in
 Extras* and select *Textr OCR*.  The settings here are the same as the
