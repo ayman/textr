@@ -41,7 +41,6 @@ In the **File** menu, select *Plug-in Manager* and click *Add*.
 ### Configuration
 
 ![The Plugin Configuration Window](./images/plugin-options.png)
-<p align="right">That's a dead key...just saying.</p>
 
 #### API Key (CLI)
 
@@ -55,9 +54,11 @@ after that it's $1.50 per 1,000.
 ##### How to get an API key for Google Cloud Services
 
 It's not too bad but not totally easy...as of the time I wrote this
-plug-in, [Google had these instructions to follow][apikey].  Do that
-and paste the about 40 character key in the Configuration section of
-the plug-in manager page.  Don't worry, Lightroom will remember it.
+plug-in, [Google had these instructions to follow][apikey].  You'll
+wanna make a project, then get an API key. You can set a quota on that
+key if you don't wanna go over your monthly queries. Do that and paste
+the about 40 character key in the Configuration section of the plug-in
+manager page.  Don't worry, Lightroom will remember it.
 
 [apikey]: https://support.google.com/cloud/answer/6158862?hl=en "Google Help Page"
 
