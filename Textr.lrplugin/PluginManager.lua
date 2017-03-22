@@ -3,14 +3,7 @@ local LrHttp = import "LrHttp"
 local LrPrefs = import 'LrPrefs'
 local LrView = import "LrView"
 
-local function getOrDefault(value, default)
-   if value == nil then
-      return default
-   end
-   return value
-end
-
-function trim(s)
+local function trim(s)
   return (s:gsub("^%s*(.-)%s*$", "%1"))
 end
 
@@ -27,6 +20,7 @@ function PluginManager.sectionsForTopOfDialog(viewFactory, properties)
 
    if (prefs.allow_regex == nil or
        prefs.allow_regex == "") then
+      prefs.allow_regex = "^.+$"
    end
 
    if (prefs.img_size == nil or
