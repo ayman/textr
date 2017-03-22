@@ -47,11 +47,9 @@ In the **File** menu, select *Plug-in Manager* and click *Add*.
 You need this to use the Google Cloud Vision API.  They give you a few
 hundred queries for free, *then they start charging you*.  Not much
 but just be aware of this.  They have
-a [pricing calculator](https://cloud.google.com/pricing/) which as of
-March 2017 states if you did 10k individual images in one day it would
-cost less than a dollar. The plug-in with batch request multiple
-photos selected into one call, I'm not sure if they charge by image or
-by call.  Do read up yourself as they might change how it works.
+a [pricing sheet](https://cloud.google.com/vision/docs/pricing) which
+as of March 2017 states you can do 1000 images per month for free
+after that it's $1.50 per 1,000.
 
 ##### How to get an API key for Google Cloud Services
 
