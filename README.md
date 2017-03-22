@@ -158,8 +158,8 @@ send me a pull request.
 
 ## Thanks!
 
-Thanks to [Adam Hodges][adam] for giving me permission to use his
-sports images here. Check him out at [Adam Hodges Photography][adam].
+Thanks to Adam Hodges for giving me permission to use his
+sports images here; check him out at [Adam Hodges Photography][adam].
 The [Bay To Breakers Storm Troopers photo][b2b] is my own.
 
 [adam]: https://adamhodges.com/ "Adam Hodges Photography"
