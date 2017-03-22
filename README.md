@@ -120,11 +120,11 @@ annotated by the plugin.
 Select a few photos and go to the **Library** menu and select *Plug-in
 Extras* and select *Textr OCR*.  The settings here are the same as the
 global ones but you can tweak them at runtime. The plug-in will
-generate thumbnails and then call the cloud in a batch.  The Textr
-stores a single custom metadata string that is searchable but won't
-clutter your existing metadata or keywords.  Text recognition can be
-kinda noisy, so I didn't want to mess up any nice categorization
-people may have.
+generate thumbnails and then call the cloud in a batch.  The Textr has
+it's own Metadata panel and stores a single custom metadata string
+that is searchable but won't clutter your existing metadata or
+keywords.  Text recognition can be kinda noisy, so I didn't want to
+mess up any nice categorization people may have.
 
 ### Undo Please
 Remember you can **undo** this task when it completes too. Or just
