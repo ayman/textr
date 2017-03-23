@@ -18,5 +18,5 @@ return {
    LrPluginInfoProvider = 'PluginInfoProvider.lua',
    LrPluginInfoUrl = "http://shamurai.com/bin/textr",
 
-   VERSION = { major=0, minor=0, revision=8, build=1470600765 },
+   VERSION = { major=0, minor=0, revision=9, build=1490299599 },
 }

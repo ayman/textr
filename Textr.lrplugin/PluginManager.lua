@@ -42,7 +42,6 @@ function PluginManager.sectionsForTopOfDialog(viewFactory, properties)
             f:column {
                spacing = f:control_spacing(),
                f:picture {
-                  -- http://www.flickr.com/photos/ayman/506142694/
                   value = _PLUGIN:resourceId( 'TextrLogo.png' ),
                   frame_width = 1,
                   frame_color = LrColor( 0, 0, 0 ),
@@ -184,32 +183,6 @@ function PluginManager.sectionsForTopOfDialog(viewFactory, properties)
          f:separator {
             fill_horizontal = 1
          },
-         -- f:row {
-         --    spacing = f.control_spacing(),
-         --    f:column {
-         --       f:static_text {
-         --          width = 44,
-         --          alignment = 'right',
-         --          title = _G.BY_LABEL,
-         --       },
-         --    },
-         --    f:column {
-         --       f:static_text {
-         --          title= LOC 'David A. Shamma.',
-         --          width_in_chars = 37,
-         --       },
-         --    },
-         --    f:column {
-         --       f:push_button {
-         --          width = 150,
-         --          title = 'Twitter: @ayman',
-         --          enabled = true,
-         --          action = function()
-         --             LrHttp.openUrlInBrowser("http://twitter.com/ayman")
-         --          end,
-         --       },
-         --    },
-         -- },
          f:row {
             spacing = f.control_spacing(),
             f:column {
