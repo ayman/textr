@@ -98,9 +98,16 @@ end
 
 --------------------------------------------------------------------------------
 
-local function getInt( v, s )
-   return math.floor(tonumber(s))
-end
+-- local function getInt( v, s )
+--    if s == nil then
+--       return 0
+--    else
+--       LOGGER:debug(v)
+--       LOGGER:debug(v.img_size)
+--       LOGGER:debug(s)      
+--       return math.floor(tonumber(s))
+--    end
+-- end
 
 --------------------------------------------------------------------------------
 -- Execution block.
@@ -123,7 +130,7 @@ local result = LrDialogs.presentModalDialog(
                },
                f:edit_field {
                   immediate = true,
-                  string_to_value = getInt,
+                  -- string_to_value = getInt,
                   increment = 32,
                   large_increment = 640,
                   precision = 0,
@@ -153,7 +160,7 @@ local result = LrDialogs.presentModalDialog(
                   increment = 1,
                   large_increment = 2,
                   immediate = true,
-                  string_to_value = getInt,
+                  -- string_to_value = getInt,
                   precision = 0,
                   min = 0,
                   max = 10,

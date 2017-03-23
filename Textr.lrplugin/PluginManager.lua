@@ -46,7 +46,7 @@ function PluginManager.sectionsForTopOfDialog(viewFactory, properties)
                   value = _PLUGIN:resourceId( 'TextrLogo.png' ),
                   frame_width = 1,
                   frame_color = LrColor( 0, 0, 0 ),
-                  tooltip = "From Bay to Breakers 2007, San Francisco",
+                  tooltip = "Textr will find 32481 and 20386\nfrom this SF Bay to Breakers 2007 photo",
                   visible = true,
                   fill_vertical = 1,
                },
