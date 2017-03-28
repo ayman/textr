@@ -22,7 +22,7 @@ whip up in today's age...and here we are.
 
 [PPP57]: https://petapixel.com/2016/03/20/ep-57-strobist-david-hobby-sticks-consumers/ "Peta Pixel Podcast where OCR gets asked."
 
-There are a few settings for the plug-in which you'll have to
+**It's not perfect.** There are a few settings for the plug-in which you'll have to
 tune. I'll get to those later.  In the screenshot above it doesn't
 pick up the jersey words or any words or letters that are kinda
 tilted.  I assume Google Cloud Vision will get better over time, but
