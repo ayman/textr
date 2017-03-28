@@ -161,7 +161,9 @@ send me a pull request.
 
 Thanks to Adam Hodges for giving me permission to use his sports
 images here; check him out at [Adam Hodges Photography][adam].
-The [Bay To Breakers Storm Troopers photo][b2b] is my own.
+The [Bay To Breakers Storm Troopers photo][b2b] is my own.  
+
+I'm on [Flickr as ayman too, follow me there](http://flickr.com/photos/ayman/). 
 
 [adam]: https://adamhodges.com/ "Adam Hodges Photography"
 
