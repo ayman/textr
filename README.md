@@ -36,8 +36,9 @@ I have a Mac. I assume Windows will be similar. Just a heads up.
 ### Install the Plug-In
 
 You do this in the usual manner.  There's a green **Clone or Download**
-button up top on this page. Put the plug-in somewhere you like. In the 
-**File** menu, select *Plug-in Manager* and click *Add*.
+button up top on [this page](https://github.com/ayman/textr). Put the 
+plug-in somewhere you like. In the  **File** menu, select 
+*Plug-in Manager* and click *Add*.
 
 ### Configuration
 
