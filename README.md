@@ -22,12 +22,12 @@ whip up in today's age...and here we are.
 
 [PPP57]: https://petapixel.com/2016/03/20/ep-57-strobist-david-hobby-sticks-consumers/ "Peta Pixel Podcast where OCR gets asked."
 
-**It's not perfect.** There are a few settings for the plug-in which you'll have to
-tune. I'll get to those later.  In the screenshot above it doesn't
-pick up the jersey words or any words or letters that are kinda
-tilted.  I assume Google Cloud Vision will get better over time, but
-for now, bib numbers and text in general should be *mostly* upright to
-work.
+**It's not perfect.** There are a few settings for the plug-in which 
+you'll have to tune. I'll get to those later.  In the screenshot above 
+it doesn't pick up the jersey words or any words or letters that are 
+kinda tilted.  I assume Google Cloud Vision will get better over time, 
+but for now, bib numbers and text in general should be *mostly* upright 
+to work.
 
 ## How to use this plug-in
 
@@ -35,8 +35,9 @@ I have a Mac. I assume Windows will be similar. Just a heads up.
 
 ### Install the Plug-In
 
-You do this in the usual manner.  Put the plug-in somewhere you like.
-In the **File** menu, select *Plug-in Manager* and click *Add*.
+You do this in the usual manner.  There's a green **Clone or Download**
+button up top on this page. Put the plug-in somewhere you like. In the 
+**File** menu, select *Plug-in Manager* and click *Add*.
 
 ### Configuration
 
